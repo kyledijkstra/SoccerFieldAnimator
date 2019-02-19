@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Rubik|Montserrat" rel="stylesheet"> 
+    <title>Tactics Board</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="actions.js"></script>
+    <script type="text/javascript" src="colors.js"></script>
+    <script type="text/javascript" src="controls.js"></script>
+    <script type="text/javascript" src="field.js"></script>
+    
+    <script type="text/javascript" src="values.js"></script>
+    <script type="text/javascript" src="formations.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <style>
+        .field {
+            margin-bottom: 5em;
+        }
+        #container .child {
+            float: left;
+        }
+        .child {
+            padding-left: 10px;
+            padding-right: 10px;
+            /* border: 1px solid black; */
+        }
+        h3 {
+            margin-bottom: 0;
+        }
+        .title-btn {
+            margin-top: 20px;
+        }
+        td {
+            padding-left: 5px; 
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .filter-box {
+            font-size: .85em;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <svg class="child field" id="tracker"></svg>
+        <div class="child" id="color-choices">
+            <h3>Color Choices</h3>
+            <table>
+                <th>
+                    <td><b>Home</b></td>
+                    <td><b>Away</b></td>
+                </th>
+                <tr>
+                    <td>Name:</td>
+                    <td><input id="home-team-name" value="Home"></input></td>
+                    <td><input id="away-team-name" value="Away"></input></td>
+                </tr>
+                <tr>
+                    <td>Player Color:</td>
+                    <td><select id="home-team-color"></select></td>
+                    <td><select id="away-team-color"></select></td>
+                </tr>
+                <tr>
+                    <td>Number Color:</td>
+                    <td><select id="home-num-color"></select></td>
+                    <td><select id="away-num-color"></select></td>
+                </tr>
+                <tr>
+                    <td>Formation:</td>
+                    <td><select id="home-team-formation"></select></td>
+                    <td><select id="away-team-formation"></select></td>
+                </tr>
+            </table>            
+        </div>
+        <div class="child" id="state">
+                
+            <table>
+                <tr>
+                    <td><h3>Players</h3></td>
+                    <!-- <td><button class="title-btn" id="add-home-player" type="button">Add Home Player</button></td>
+                    <td><button class="title-btn" id="add-home-team" type="button">Add Home Team</button></td>
+                    <td><button class="title-btn" id="add-away-player" type="button">Add Away Player</button></td>
+                    <td><button class="title-btn" id="add-away-team" type="button">Add Away Team</button></td> -->
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td align="center"><b>Home</b></td>
+                    <td align="center"><b>Away</b></td>
+                </tr>
+                <tr style="margin: 0;">
+                    <td align="center"><button id="add-home-team" type="button">+ Team</button></td>
+                    <td align="center"><button id="add-away-team" type="button">+ Team</button></td>
+                </tr>
+
+                <tr>
+                    <td align="center"><button id="add-home-player" type="button">+ Player</button></td>
+                    <td align="center"><button id="add-away-player" type="button">+ Player</button></td>
+                </tr>
+                <tr>
+                    <td align="center"><ul id="player-list-home"></ul></td>
+                    <td align="center"><ul id="player-list-away"></ul></td>
+                </tr>
+            </table>
+        </div>
+        <br><br>
+        <svg class="child field" id="field-tracker"></svg>
+    </div>
+    
+    
+</body>
+</html>
+
+
