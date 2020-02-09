@@ -20,6 +20,7 @@ function addPlayer(team, individual) {
         x: FIELD_WIDTH / 2,
         y: SIDELINE_MARGIN + (12 * SIZE_MULT),
         number: smallestAvailableNumber(HOME.players),
+        name: '',
         id: HOME.playerIdTracker++
       });
     }
@@ -50,12 +51,23 @@ function addPlayer(team, individual) {
       .text(function(d) { return d.number })
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
+    elemEnter.append("text")
+      .attr("class", "home-player-name")
+      .attr("id", function (d) { return "home-player-name-" + d.id; })
+      .attr("dominant-baseline", "text-top")
+      .attr("text-anchor", "middle")
+      .style("fill", HOME.numColor)
+      .style("font-size", 12)
+      .style("font-family", "Rubik")
+      .attr("dy", "-1.25em")
+      .text(function(d) { return d.name });
   } else {
     if (individual) {
       AWAY.players.push({
         x: FIELD_WIDTH / 2,
         y: FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT),
         number: smallestAvailableNumber(AWAY.players),
+        name: '',
         id: AWAY.playerIdTracker++
       });
     }
@@ -86,6 +98,16 @@ function addPlayer(team, individual) {
       .text(function(d) { return d.number })
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
+    elemEnter.append("text")
+      .attr("class", "away-player-name")
+      .attr("id", function (d) { return "away-player-name-" + d.id; })
+      .attr("dominant-baseline", "text-top")
+      .attr("text-anchor", "middle")
+      .style("fill", AWAY.numColor)
+      .style("font-size", 12)
+      .style("font-family", "Rubik")
+      .attr("dy", "-1.25em")
+      .text(function(d) { return d.name });
   }
   writePlayerList();
 }
@@ -109,7 +131,7 @@ function dragended(d) {
   d3.select(this).classed("active", false);
 }
 
-//get the smalles number available from a squad of players
+//get the smallest number available from a squad of players
 function smallestAvailableNumber(squad) {
   var smallestAvailableNumber = 1;
   var inUse = numberUsed(squad, smallestAvailableNumber);
@@ -135,7 +157,6 @@ function getSetup(formation, team) {
       if (team === "A") return FORMATIONS[f].away;
     }
   }
-  console.log("could not find formation");
 }
 
 function writePlayerList() {
@@ -154,7 +175,7 @@ function writePlayerList() {
 function addPlayerToList(player, team) {
   if (team === "H") {
     var list = d3.select("#player-list-home");
-    var item = list.insert("li",":first-child")
+    var item = list.append("li",":first-child")
       .attr("id", "home-player-list-" + player.id)
       .attr("class", "home-player-list");
     item.html("Player #:");
@@ -166,13 +187,19 @@ function addPlayerToList(player, team) {
       .attr("max", 99)
       .style("width", "30px")
       .on("input", function() { updatePlayerNumber(+this.value, player.id, "H"); });
+    item.append("input")
+        .attr("id", "home-player-list-name-input-" + player.id)
+        .attr("type", "text")
+        .attr("value", player.name)
+        .style("width", "70px")
+        .on("input", function() { updatePlayerName(this.value, player.id, "H"); });
     item.append("button")
       .attr("id", "home-player-list-button-" + player.id)
       .text("X")
       .on("click", function(d) { removePlayer("home", player.id); });
   } else {
     var list = d3.select("#player-list-away");
-    var item = list.insert("li",":first-child")
+    var item = list.append("li",":first-child")
       .attr("id", "away-player-list-" + player.id)
       .attr("class", "away-player-list");
     item.html("Player #:");
@@ -184,6 +211,12 @@ function addPlayerToList(player, team) {
       .attr("max", 99)
       .style("width", "30px")
       .on("input", function() { updatePlayerNumber(+this.value, player.id, "A"); });
+    item.append("input")
+      .attr("id", "away-player-list-name-input-" + player.id)
+      .attr("type", "text")
+      .attr("value", player.name)
+      .style("width", "70px")
+      .on("input", function() { updatePlayerName(this.value, player.id, "A"); });
     item.append("button")
       .attr("id", "away-player-list-button-" + player.id)
       .text("X")
@@ -212,7 +245,28 @@ function updatePlayerNumber(number, id, team) {
       }
     }
   }
-  
+}
+
+function updatePlayerName(name, id, team) {
+  if (team === "H") {
+    for (var i=0; i < HOME.players.length; i++) {
+      var player = HOME.players[i];
+      if (player.id === id) {
+        HOME.players[i].name = name;
+        d3.selectAll("#home-player-name-" + player.id)
+          .text(name);
+      }
+    }
+  } else {
+    for (var i=0; i < AWAY.players.length; i++) {
+      var player = AWAY.players[i];
+      if (player.id === id) {
+        AWAY.players[i].name = name;
+        d3.selectAll("#away-player-name-" + player.id)
+          .text(name);
+      }
+    }
+  }
 }
 
 function removePlayer(team, id) {
