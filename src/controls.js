@@ -5,6 +5,8 @@ function handlers() {
   playerControls();
   //animation controls
   animationControls();
+  //drawing controls
+  drawingControls();
 }
 
 //attach event handlers to player buttons
@@ -29,4 +31,9 @@ function teamControls() {
 function animationControls() {
   document.getElementById("play-animations").onclick = function() {playAnimations()};
   document.getElementById("add-animation").onclick = function() {addAnimation()};
+}
+
+//attach event handlers to drawing buttons
+function drawingControls() {
+  document.getElementById("draw-vertical-zones").onclick = function() {drawVerticalZones(FIELD_ID)};
 }

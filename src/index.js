@@ -1,7 +1,6 @@
 /**
  * TODO
- * Add ball
- * Animations
+ * 
  */
 
 $(document).ready(function() {

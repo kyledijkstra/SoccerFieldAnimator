@@ -10,10 +10,6 @@ function drawField(id) {
     }
     //draw lines on the field
     drawFieldLines(id);
-    //write team names at top of field
-    // writeTeamNames(id);
-    //draw clock
-    // clock(id);
 }
 
 function drawAlternatingField(id) {
@@ -69,9 +65,9 @@ function drawFieldLines(id) {
         .attr("cx", FIELD_LENGTH / 2)
         .attr("cy", FIELD_WIDTH / 2)     
         .attr("r", .4 * SIZE_MULT);
-    //draw top 18 yd box
+    //draw left 18 yd box
     field.append("rect")
-        .attr("class", "top-eighteen")
+        .attr("class", "left-eighteen")
         .attr("width", 18 * SIZE_MULT)
         .attr("height", 44 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
@@ -79,9 +75,9 @@ function drawFieldLines(id) {
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
-    //draw bottom 18 yd box
+    //draw right 18 yd box
     field.append("rect")
-        .attr("class", "bottom-eighteen")
+        .attr("class", "right-eighteen")
         .attr("height", 44 * SIZE_MULT)
         .attr("width", 18 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
@@ -90,9 +86,9 @@ function drawFieldLines(id) {
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
 
-    //draw top 6 yd box
+    //draw left 6 yd box
     field.append("rect")
-        .attr("class", "top-six")
+        .attr("class", "left-six")
         .attr("width", 6 * SIZE_MULT)
         .attr("height", 20 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
@@ -100,9 +96,9 @@ function drawFieldLines(id) {
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
-    //draw bottom 6 yd box
+    //draw right 6 yd box
     field.append("rect")
-        .attr("class", "bottom-six")
+        .attr("class", "right-six")
         .attr("width", 6 * SIZE_MULT)
         .attr("height", 20 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
@@ -111,23 +107,23 @@ function drawFieldLines(id) {
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
 
-    //draw top PK spot
+    //draw left PK spot
     field.append("circle")
-        .attr("class", "top-pk")
+        .attr("class", "left-pk")
         .style("fill", LINE_COLOR) 
         .attr("cy", FIELD_WIDTH / 2)
         .attr("cx", SIDELINE_MARGIN + (12 * SIZE_MULT))      
         .attr("r", .4 * SIZE_MULT);
-    //draw bottom PK spot
+    //draw right PK spot
     field.append("circle")
-        .attr("class", "bottom-pk")
+        .attr("class", "right-pk")
         .style("fill", LINE_COLOR) 
         .attr("cy", FIELD_WIDTH / 2)
         .attr("cx", FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT))  
         .attr("r", .4 * SIZE_MULT);
 
-    //draw top D
-    var topd = d3.arc()
+    //draw left D
+    var leftd = d3.arc()
         .innerRadius(SIZE_MULT*10)
         .outerRadius(SIZE_MULT*10)
         .startAngle(37*(Math.PI/180))
@@ -137,10 +133,10 @@ function drawFieldLines(id) {
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
-        .attr("d", topd)
+        .attr("d", leftd)
         .attr("transform", "translate(" + (SIDELINE_MARGIN + (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");
-    //draw bottom D
-    var bottomd = d3.arc()
+    //draw right D
+    var rightd = d3.arc()
         .innerRadius(SIZE_MULT*10)
         .outerRadius(SIZE_MULT*10)
         .startAngle(217*(Math.PI/180))
@@ -150,7 +146,7 @@ function drawFieldLines(id) {
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
-        .attr("d", bottomd)
+        .attr("d", rightd)
         .attr("transform", "translate(" + (FIELD_LENGTH-SIDELINE_MARGIN - (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");   
         
     //draw ball
@@ -167,12 +163,61 @@ function drawFieldLines(id) {
             .on("end", dragended));
 }
 
+function drawVerticalZones(id) {
+    if (!VERTICAL_ZONES) {
+        var field = d3.select(id);
+        //draw line between left wing and left hs
+        field.append("line")
+            .attr("class", "vert-zone-line")
+            .attr("id", "left-wing-left-hs-line")
+            .style("stroke", LINE_COLOR)
+            .style("stroke-width", 2)
+            .attr("y1", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
+            .attr("x1", SIDELINE_MARGIN)
+            .attr("y2", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN);
+        //draw line between left hs and center
+        field.append("line")
+            .attr("class", "vert-zone-line")
+            .attr("id", "left-hs-center-line")
+            .style("stroke", LINE_COLOR)
+            .style("stroke-width", 2)
+            .attr("y1", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
+            .attr("x1", SIDELINE_MARGIN + (18 * SIZE_MULT))
+            .attr("y2", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT));
+        //draw line between right hs and center
+        field.append("line")
+            .attr("class", "vert-zone-line")
+            .attr("id", "right-hs-center-line")
+            .style("stroke", LINE_COLOR)
+            .style("stroke-width", 2)
+            .attr("y1", (FIELD_WIDTH / 2) + (10 * SIZE_MULT))
+            .attr("x1", SIDELINE_MARGIN + (18 * SIZE_MULT))
+            .attr("y2", (FIELD_WIDTH / 2) + (10 * SIZE_MULT))
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT));
+        //draw line between right wing and right hs
+        field.append("line")
+            .attr("class", "vert-zone-line")
+            .attr("id", "right-wing-right-hs-line")
+            .style("stroke", LINE_COLOR)
+            .style("stroke-width", 2)
+            .attr("y1", (FIELD_WIDTH / 2) + (22 * SIZE_MULT))
+            .attr("x1", SIDELINE_MARGIN)
+            .attr("y2", (FIELD_WIDTH / 2) + (22 * SIZE_MULT))
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN);  
+    } else {
+        d3.select(id).selectAll(".vert-zone-line").remove();
+    }
+    VERTICAL_ZONES = !VERTICAL_ZONES;
+}
+
 function dragball(d) {
     var xNew = d3.event.x,
         yNew = d3.event.y;
-    if (xNew > FIELD_WIDTH)  xNew = FIELD_WIDTH - SIZE_MULT;
+    if (xNew > FIELD_LENGTH)  xNew = FIELD_LENGTH - SIZE_MULT;
     if (xNew < 0)            xNew = 0 + SIZE_MULT;
-    if (yNew > FIELD_LENGTH) yNew = FIELD_LENGTH - SIZE_MULT;
+    if (yNew > FIELD_WIDTH) yNew = FIELD_WIDTH - SIZE_MULT;
     if (yNew < 0)            yNew = 0 + SIZE_MULT;
     d3.select(this).attr("cx", xNew).attr("cy", yNew);
     BALL_POSITION = {

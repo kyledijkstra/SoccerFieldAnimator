@@ -1,12 +1,11 @@
 //GLOBAL VARIABLES
 var FIELD_DIMENSIONS = {length: 120, width: 80},
-    SIZE_MULT = 7,
-    SIDELINE_MARGIN = 10,
+    SIZE_MULT = 11,
+    SIDELINE_MARGIN = 20,
     MARGIN_TOP = 0,
     FIELD_ID = "#tracker",
     FIELD_LENGTH = (FIELD_DIMENSIONS.length * SIZE_MULT) + (2 * SIDELINE_MARGIN),
     FIELD_WIDTH = (FIELD_DIMENSIONS.width * SIZE_MULT) + (2 * SIDELINE_MARGIN),
-    // FIELD_COLOR = "olivedrab",
     FIELD_COLOR = "#3cb25b",
     FIELD_COLOR_ALT = "#33994e",
     LINE_COLOR = "white",
@@ -33,5 +32,6 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         y: FIELD_WIDTH / 2
     },
     ANIMATION_HISTORY = {},
-    ANIMATION_NUMBER = 0;
+    ANIMATION_NUMBER = 0,
+    VERTICAL_ZONES = false;
 var PLAYER_RADIUS = PLAYER_CIRCLE_SIZE * SIZE_MULT;
