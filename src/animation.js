@@ -57,8 +57,6 @@ function addAnimation() {
       }
     }
   }
-
-  console.log(ANIMATION_HISTORY);
   writeAnimationList();
   
 }

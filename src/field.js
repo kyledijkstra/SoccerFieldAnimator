@@ -2,8 +2,8 @@
 function drawField(id) {
     //draw field            
     var field = d3.select(id)
-        .attr("height", FIELD_LENGTH + MARGIN_TOP)
-        .attr("width", FIELD_WIDTH)
+        .attr("width", FIELD_LENGTH + MARGIN_TOP)
+        .attr("height", FIELD_WIDTH)
         .style("background", FIELD_COLOR);
     if (FIELD_COLOR_ALT !== "none") {
         drawAlternatingField(id);
@@ -22,13 +22,12 @@ function drawAlternatingField(id) {
         //draw alternating field colors
         field.append("rect")
             .attr("class", "alt-field-color-" + i)
-            .attr("height", 6 * SIZE_MULT)
-            .attr("width", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
-            .attr("x", SIDELINE_MARGIN)
-            .attr("y", SIDELINE_MARGIN + MARGIN_TOP + (i * 6 * SIZE_MULT))
+            .attr("width", 6 * SIZE_MULT)
+            .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
+            .attr("x", SIDELINE_MARGIN + MARGIN_TOP + (i * 6 * SIZE_MULT))
+            .attr("y", SIDELINE_MARGIN)
             .style("fill", FIELD_COLOR_ALT);
     }
-    
 }
 
 //draw all lines on field
@@ -38,8 +37,8 @@ function drawFieldLines(id) {
     //draw sidelines
     field.append("rect")
         .attr("class", "sidelines")
-        .attr("height", FIELD_LENGTH - (2 * SIDELINE_MARGIN))
-        .attr("width", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
+        .attr("width", FIELD_LENGTH - (2 * SIDELINE_MARGIN))
+        .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
         .attr("x", SIDELINE_MARGIN)
         .attr("y", SIDELINE_MARGIN + MARGIN_TOP)
         .style("fill", "none")
@@ -50,43 +49,43 @@ function drawFieldLines(id) {
         .attr("class", "center-line")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2)  
-        .attr("x1", SIDELINE_MARGIN)
-        .attr("y1", FIELD_LENGTH / 2)      
-        .attr("x2", FIELD_WIDTH - SIDELINE_MARGIN)
-        .attr("y2", FIELD_LENGTH / 2);
+        .attr("y1", SIDELINE_MARGIN)
+        .attr("x1", FIELD_LENGTH / 2)      
+        .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN)
+        .attr("x2", FIELD_LENGTH / 2);
     //draw center circle
     field.append("circle")
         .attr("class", "center-circle")
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2)  
-        .attr("cx", FIELD_WIDTH / 2)
-        .attr("cy", FIELD_LENGTH / 2)
+        .attr("cx", FIELD_LENGTH / 2)
+        .attr("cy", FIELD_WIDTH / 2)
         .attr("r", 10 * SIZE_MULT);
     // //draw center dot
     field.append("circle")
         .attr("class", "center-dot")
         .style("fill", LINE_COLOR) 
-        .attr("cx", FIELD_WIDTH / 2)
-        .attr("cy", FIELD_LENGTH / 2)     
+        .attr("cx", FIELD_LENGTH / 2)
+        .attr("cy", FIELD_WIDTH / 2)     
         .attr("r", .4 * SIZE_MULT);
     //draw top 18 yd box
     field.append("rect")
         .attr("class", "top-eighteen")
-        .attr("height", 18 * SIZE_MULT)
-        .attr("width", 44 * SIZE_MULT)
-        .attr("x", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
-        .attr("y", SIDELINE_MARGIN)
+        .attr("width", 18 * SIZE_MULT)
+        .attr("height", 44 * SIZE_MULT)
+        .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
+        .attr("x", SIDELINE_MARGIN)
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
     //draw bottom 18 yd box
     field.append("rect")
         .attr("class", "bottom-eighteen")
-        .attr("width", 44 * SIZE_MULT)
-        .attr("height", 18 * SIZE_MULT)
-        .attr("x", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
-        .attr("y", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT))
+        .attr("height", 44 * SIZE_MULT)
+        .attr("width", 18 * SIZE_MULT)
+        .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
+        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT))
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -94,20 +93,20 @@ function drawFieldLines(id) {
     //draw top 6 yd box
     field.append("rect")
         .attr("class", "top-six")
-        .attr("height", 6 * SIZE_MULT)
-        .attr("width", 20 * SIZE_MULT)
-        .attr("x", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
-        .attr("y", SIDELINE_MARGIN)
+        .attr("width", 6 * SIZE_MULT)
+        .attr("height", 20 * SIZE_MULT)
+        .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
+        .attr("x", SIDELINE_MARGIN)
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
     //draw bottom 6 yd box
     field.append("rect")
         .attr("class", "bottom-six")
-        .attr("height", 6 * SIZE_MULT)
-        .attr("width", 20 * SIZE_MULT)
-        .attr("x", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
-        .attr("y", FIELD_LENGTH - SIDELINE_MARGIN - (6 * SIZE_MULT))
+        .attr("width", 6 * SIZE_MULT)
+        .attr("height", 20 * SIZE_MULT)
+        .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
+        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN - (6 * SIZE_MULT))
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -116,43 +115,43 @@ function drawFieldLines(id) {
     field.append("circle")
         .attr("class", "top-pk")
         .style("fill", LINE_COLOR) 
-        .attr("cx", FIELD_WIDTH / 2)
-        .attr("cy", SIDELINE_MARGIN + (12 * SIZE_MULT))      
+        .attr("cy", FIELD_WIDTH / 2)
+        .attr("cx", SIDELINE_MARGIN + (12 * SIZE_MULT))      
         .attr("r", .4 * SIZE_MULT);
     //draw bottom PK spot
     field.append("circle")
         .attr("class", "bottom-pk")
         .style("fill", LINE_COLOR) 
-        .attr("cx", FIELD_WIDTH / 2)
-        .attr("cy", FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT))  
+        .attr("cy", FIELD_WIDTH / 2)
+        .attr("cx", FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT))  
         .attr("r", .4 * SIZE_MULT);
 
     //draw top D
     var topd = d3.arc()
         .innerRadius(SIZE_MULT*10)
         .outerRadius(SIZE_MULT*10)
-        .startAngle(127*(Math.PI/180))
-        .endAngle(233*(Math.PI/180));
+        .startAngle(37*(Math.PI/180))
+        .endAngle(143*(Math.PI/180));
     field.append("path")
         .attr("class", "left-d")
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
         .attr("d", topd)
-        .attr("transform", "translate(" + ((FIELD_WIDTH/2)+MARGIN_TOP) + ", " + (SIDELINE_MARGIN + (12 * SIZE_MULT)) + ")");
+        .attr("transform", "translate(" + (SIDELINE_MARGIN + (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");
     //draw bottom D
     var bottomd = d3.arc()
         .innerRadius(SIZE_MULT*10)
         .outerRadius(SIZE_MULT*10)
-        .startAngle(-53*(Math.PI/180))
-        .endAngle(53*(Math.PI/180));
+        .startAngle(217*(Math.PI/180))
+        .endAngle(323*(Math.PI/180));
     field.append("path")
         .attr("class", "right-d")
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
         .attr("d", bottomd)
-        .attr("transform", "translate(" + ((FIELD_WIDTH/2)+MARGIN_TOP) + ", " + (FIELD_LENGTH-SIDELINE_MARGIN - (12 * SIZE_MULT)) + ")");   
+        .attr("transform", "translate(" + (FIELD_LENGTH-SIDELINE_MARGIN - (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");   
         
     //draw ball
     field.append("circle")

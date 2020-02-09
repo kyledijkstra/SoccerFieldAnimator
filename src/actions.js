@@ -120,9 +120,9 @@ function dragged(d) {
   // d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
   d.x = d3.event.x;
   d.y = d3.event.y;
-  if (d.x > FIELD_WIDTH) d.x = FIELD_WIDTH - PLAYER_RADIUS;
+  if (d.x > FIELD_LENGTH) d.x = FIELD_LENGTH - PLAYER_RADIUS;
   if (d.x < 0) d.x = 0 + PLAYER_RADIUS;
-  if (d.y > FIELD_LENGTH) d.y = FIELD_LENGTH - PLAYER_RADIUS;
+  if (d.y > FIELD_WIDTH) d.y = FIELD_WIDTH - PLAYER_RADIUS;
   if (d.y < 0) d.y = 0 + PLAYER_RADIUS;
   d3.select(this).attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")" })
 }

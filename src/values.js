@@ -29,8 +29,8 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     COLORS = ["black", "blue", "chartreuse", "cyan", "darkblue", "lightcoral", "magenta", "maroon", "orange", "plum", "purple", "red", "white", "yellow"],
     PLAYER_CIRCLE_SIZE = 1.75,
     BALL_POSITION = {
-        x: FIELD_WIDTH / 2,
-        y: FIELD_LENGTH / 2
+        x: FIELD_LENGTH / 2,
+        y: FIELD_WIDTH / 2
     },
     ANIMATION_HISTORY = {},
     ANIMATION_NUMBER = 0;
