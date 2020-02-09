@@ -5,6 +5,9 @@ function drawField(id) {
         .attr("height", FIELD_LENGTH + MARGIN_TOP)
         .attr("width", FIELD_WIDTH)
         .style("background", FIELD_COLOR);
+    if (FIELD_COLOR_ALT !== "none") {
+        drawAlternatingField(id);
+    }
     //draw lines on the field
     drawFieldLines(id);
     //write team names at top of field
@@ -13,9 +16,25 @@ function drawField(id) {
     // clock(id);
 }
 
+function drawAlternatingField(id) {
+    var field = d3.select(id);
+    for (var i=0; i<FIELD_DIMENSIONS.length/6; i=i+2) {
+        //draw alternating field colors
+        field.append("rect")
+            .attr("class", "alt-field-color-" + i)
+            .attr("height", 6 * SIZE_MULT)
+            .attr("width", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
+            .attr("x", SIDELINE_MARGIN)
+            .attr("y", SIDELINE_MARGIN + MARGIN_TOP + (i * 6 * SIZE_MULT))
+            .style("fill", FIELD_COLOR_ALT);
+    }
+    
+}
+
 //draw all lines on field
 function drawFieldLines(id) {
     var field = d3.select(id);
+
     //draw sidelines
     field.append("rect")
         .attr("class", "sidelines")
@@ -106,31 +125,62 @@ function drawFieldLines(id) {
         .style("fill", LINE_COLOR) 
         .attr("cx", FIELD_WIDTH / 2)
         .attr("cy", FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT))  
-        .attr("r", .4 * SIZE_MULT);   
-    
+        .attr("r", .4 * SIZE_MULT);
+
     //draw top D
     var topd = d3.arc()
         .innerRadius(SIZE_MULT*10)
-        .outerRadius((SIZE_MULT*10)+2)
-        .startAngle(135*(Math.PI/180))
-        .endAngle(225*(Math.PI/180));
+        .outerRadius(SIZE_MULT*10)
+        .startAngle(127*(Math.PI/180))
+        .endAngle(233*(Math.PI/180));
     field.append("path")
-        .attr("class", "top-d")
-        .style("fill", LINE_COLOR)
+        .attr("class", "left-d")
+        .style("fill", "none")
+        .style("stroke", LINE_COLOR)
+        .style("stroke-width", 2) 
         .attr("d", topd)
-        .attr("transform", "translate(" + (FIELD_WIDTH/2) + ", " + (SIDELINE_MARGIN+(18 * SIZE_MULT)-(SIZE_MULT*10-20)) + ")");
+        .attr("transform", "translate(" + ((FIELD_WIDTH/2)+MARGIN_TOP) + ", " + (SIDELINE_MARGIN + (12 * SIZE_MULT)) + ")");
     //draw bottom D
     var bottomd = d3.arc()
         .innerRadius(SIZE_MULT*10)
-        .outerRadius((SIZE_MULT*10)+2)
-        .startAngle(45*(Math.PI/180))
-        .endAngle(-45*(Math.PI/180));
+        .outerRadius(SIZE_MULT*10)
+        .startAngle(-53*(Math.PI/180))
+        .endAngle(53*(Math.PI/180));
     field.append("path")
-        .attr("class", "bottom-d")
-        .style("fill", LINE_COLOR)
+        .attr("class", "right-d")
+        .style("fill", "none")
+        .style("stroke", LINE_COLOR)
+        .style("stroke-width", 2) 
         .attr("d", bottomd)
-        .attr("transform", "translate(" + (FIELD_WIDTH/2) + ", " + (FIELD_LENGTH-SIDELINE_MARGIN-(18 * SIZE_MULT)+50) + ")");   
+        .attr("transform", "translate(" + ((FIELD_WIDTH/2)+MARGIN_TOP) + ", " + (FIELD_LENGTH-SIDELINE_MARGIN - (12 * SIZE_MULT)) + ")");   
+        
+    //draw ball
+    field.append("circle")
+        .attr("id", "ball")
+        .attr("filter", "url(#ball-filter)") 
+        .attr("cx", BALL_POSITION.x)
+        .attr("cy", BALL_POSITION.y)  
+        .attr("r", SIZE_MULT)
+        .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragball)
+            .on("end", dragended));
 }
+
+function dragball(d) {
+    var xNew = d3.event.x,
+        yNew = d3.event.y;
+    if (xNew > FIELD_WIDTH)  xNew = FIELD_WIDTH - SIZE_MULT;
+    if (xNew < 0)            xNew = 0 + SIZE_MULT;
+    if (yNew > FIELD_LENGTH) yNew = FIELD_LENGTH - SIZE_MULT;
+    if (yNew < 0)            yNew = 0 + SIZE_MULT;
+    d3.select(this).attr("cx", xNew).attr("cy", yNew);
+    BALL_POSITION = {
+        x: xNew,
+        y: yNew
+    };
+  }
 
 function writeTeamNames(id) {
     var field = d3.select(id);

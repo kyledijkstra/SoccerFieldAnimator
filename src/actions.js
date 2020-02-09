@@ -42,7 +42,7 @@ function addPlayer(team, individual) {
     elemEnter.append("text")
       .attr("class", "home-player-number")
       .attr("id", function (d) { return "home-player-number-" + d.id; })
-      .attr("dominant-baseline", "mathematical")
+      .attr("dominant-baseline", "central")
       .attr("text-anchor", "middle")
       .style("fill", HOME.numColor)
       .style("font-size", 18)
@@ -78,7 +78,7 @@ function addPlayer(team, individual) {
     elemEnter.append("text")
       .attr("class", "away-player-number")
       .attr("id", function (d) { return "away-player-number-" + d.id; })
-      .attr("dominant-baseline", "mathematical")
+      .attr("dominant-baseline", "central")
       .attr("text-anchor", "middle")
       .style("fill", AWAY.numColor)
       .style("font-size", 18)
@@ -88,8 +88,6 @@ function addPlayer(team, individual) {
       .on("mouseout", function (d) {});
   }
   writePlayerList();
-  // console.log(HOME.players);
-  // console.log(AWAY.players);
 }
 
 function dragstarted(d) {
@@ -100,6 +98,10 @@ function dragged(d) {
   // d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
   d.x = d3.event.x;
   d.y = d3.event.y;
+  if (d.x > FIELD_WIDTH) d.x = FIELD_WIDTH - PLAYER_RADIUS;
+  if (d.x < 0) d.x = 0 + PLAYER_RADIUS;
+  if (d.y > FIELD_LENGTH) d.y = FIELD_LENGTH - PLAYER_RADIUS;
+  if (d.y < 0) d.y = 0 + PLAYER_RADIUS;
   d3.select(this).attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")" })
 }
 
@@ -238,3 +240,4 @@ function removePlayer(team, id) {
     }
   }
 }
+

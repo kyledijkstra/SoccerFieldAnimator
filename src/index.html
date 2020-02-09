@@ -12,7 +12,7 @@
     <script type="text/javascript" src="colors.js"></script>
     <script type="text/javascript" src="controls.js"></script>
     <script type="text/javascript" src="field.js"></script>
-    
+    <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="values.js"></script>
     <script type="text/javascript" src="formations.js"></script>
     <script type="text/javascript" src="index.js"></script>
@@ -50,7 +50,11 @@
 </head>
 <body>
     <div id="container">
-        <svg class="child field" id="tracker"></svg>
+        <svg class="child field" id="tracker">\
+            <filter id="ball-filter" x="0%" y="0%" width="100%" height="100%">
+                <feImage xlink:href = "images/ball.png"/>
+            </filter>
+        </svg>
         <div class="child" id="color-choices">
             <h3>Color Choices</h3>
             <table>
@@ -80,17 +84,8 @@
                 </tr>
             </table>            
         </div>
-        <div class="child" id="state">
-                
-            <table>
-                <tr>
-                    <td><h3>Players</h3></td>
-                    <!-- <td><button class="title-btn" id="add-home-player" type="button">Add Home Player</button></td>
-                    <td><button class="title-btn" id="add-home-team" type="button">Add Home Team</button></td>
-                    <td><button class="title-btn" id="add-away-player" type="button">Add Away Player</button></td>
-                    <td><button class="title-btn" id="add-away-team" type="button">Add Away Team</button></td> -->
-                </tr>
-            </table>
+        <div class="child" id="players">
+            <h3>Players</h3>
             <table>
                 <tr>
                     <td align="center"><b>Home</b></td>
@@ -110,6 +105,16 @@
                     <td align="center"><ul id="player-list-away"></ul></td>
                 </tr>
             </table>
+        </div>
+        <div class="child" id="animation">
+            <table>
+                <tr>
+                    <td><h3>Animation</h3></td>
+                    <td><button class="title-btn" id="play-animations" type="button">Play</button></td>
+                    <td><button class="title-btn" id="add-animation" type="button">+ Animation</button></td>
+                </tr>  
+            </table>
+            <ul id="animation-history"></ul>
         </div>
         <br><br>
         <svg class="child field" id="field-tracker"></svg>

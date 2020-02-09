@@ -1,5 +1,5 @@
 //GLOBAL VARIABLES
-var FIELD_DIMENSIONS = {length: 105, width: 80},
+var FIELD_DIMENSIONS = {length: 120, width: 80},
     SIZE_MULT = 7,
     SIDELINE_MARGIN = 10,
     MARGIN_TOP = 0,
@@ -8,6 +8,7 @@ var FIELD_DIMENSIONS = {length: 105, width: 80},
     FIELD_WIDTH = (FIELD_DIMENSIONS.width * SIZE_MULT) + (2 * SIDELINE_MARGIN),
     // FIELD_COLOR = "olivedrab",
     FIELD_COLOR = "#3cb25b",
+    FIELD_COLOR_ALT = "#33994e",
     LINE_COLOR = "white",
     HOME = {
         name: "Home",
@@ -26,5 +27,11 @@ var FIELD_DIMENSIONS = {length: 105, width: 80},
         players: []
     },
     COLORS = ["black", "blue", "chartreuse", "cyan", "darkblue", "lightcoral", "magenta", "maroon", "orange", "plum", "purple", "red", "white", "yellow"],
-    PLAYER_CIRCLE_SIZE = 2;
+    PLAYER_CIRCLE_SIZE = 1.75,
+    BALL_POSITION = {
+        x: FIELD_WIDTH / 2,
+        y: FIELD_LENGTH / 2
+    },
+    ANIMATION_HISTORY = {},
+    ANIMATION_NUMBER = 0;
 var PLAYER_RADIUS = PLAYER_CIRCLE_SIZE * SIZE_MULT;

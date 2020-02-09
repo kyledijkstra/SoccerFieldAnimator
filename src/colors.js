@@ -46,10 +46,10 @@ function addColorOptions() {
     $("#home-num-color").html($("#home-team-color").html());
     $("#away-team-color").html($("#home-team-color").html());
     $("#away-num-color").html($("#home-team-color").html());
-    // $("#home-pass-color").html($("#home-team-color").html());
-    // $("#home-shot-color").html($("#home-team-color").html());
-    // $("#home-goal-color").html($("#home-team-color").html());
-    // $("#away-pass-color").html($("#home-team-color").html());
-    // $("#away-shot-color").html($("#home-team-color").html());
-    // $("#away-goal-color").html($("#home-team-color").html());
+
+    //set default selected values
+    $("#home-team-color").val(HOME.color);
+    $("#home-num-color").val(HOME.numColor);
+    $("#away-team-color").val(AWAY.color);
+    $("#away-num-color").val(AWAY.numColor);
 }

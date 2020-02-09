@@ -1,6 +1,5 @@
 /**
  * TODO
- * Edit player numbers in side panel 
  * Add ball
  * Animations
  */

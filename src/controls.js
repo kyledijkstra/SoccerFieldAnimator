@@ -3,6 +3,8 @@ function handlers() {
   teamControls();
   //player setting controls
   playerControls();
+  //animation controls
+  animationControls();
 }
 
 //attach event handlers to player buttons
@@ -21,4 +23,10 @@ function teamControls() {
   document.getElementById("away-team-color").onchange     = function() {AWAY.color = this.value;};
   document.getElementById("away-num-color").onchange      = function() {AWAY.numColor = this.value;};
   document.getElementById("away-team-formation").onchange = function() {AWAY.formation = this.value;};
+}
+
+//attach event handlers to animation buttons
+function animationControls() {
+  document.getElementById("play-animations").onclick = function() {playAnimations()};
+  document.getElementById("add-animation").onclick = function() {addAnimation()};
 }
