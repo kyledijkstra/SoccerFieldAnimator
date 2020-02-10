@@ -1,6 +1,6 @@
 //GLOBAL VARIABLES
 var FIELD_DIMENSIONS = {length: 120, width: 80},
-    SIZE_MULT = 11,
+    SIZE_MULT = 10,
     SIDELINE_MARGIN = 20,
     MARGIN_TOP = 0,
     FIELD_ID = "#tracker",
@@ -33,6 +33,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     },
     ANIMATION_HISTORY = {},
     ANIMATION_NUMBER = 0,
+    CURRENT_ANIMATION = 0,
     VERTICAL_ZONES = false,
     ATTACKING_ZONES = false,
     ATTACKING_ZONES_COLOR = "black";

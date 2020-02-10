@@ -95,7 +95,6 @@ function playAnimations() {
           .delay(delay * a)
           .attr("transform", function(d) { return "translate(" + location.x + "," + location.y + ")" });
       }
-      
     }
     //Draw away players
     for (var p=0; p < AWAY.players.length; p++) {
@@ -129,11 +128,11 @@ function addAnimationToList(id) {
       .attr("id", "animation-history-" + id)
       .attr("class", "animation-history-list");
     item.html("Slide #" + (parseInt(id)+1));
-    // item.append("button")
-    //   .attr("id", "animation-history-list-goto-button-" + id)
-    //   .attr("class", "animation-history-list")
-    //   .text("V")
-    //   .on("click", function(d) { goToAnimation(id); });
+    item.append("button")
+      .attr("id", "animation-history-list-goto-button-" + id)
+      .attr("class", "animation-history-list")
+      .text("V")
+      .on("click", function(d) { goToAnimation(id); });
     item.append("button")
       .attr("id", "animation-history-list-delete-button-" + id)
       .attr("class", "animation-history-list")
@@ -156,6 +155,28 @@ function removeAnimation(id) {
   writeAnimationList();
 }
 
-function goToAnimation(id) {
-
+function goToAnimation(slideNumber) {
+  CURRENT_ANIMATION = slideNumber;
+  // Draw ball
+  var ballLocations = ANIMATION_HISTORY.ball.locations;
+  var ball = d3.select("#ball");
+  ball // set ball to initial position
+    .attr("cx", ballLocations[slideNumber].x)
+    .attr("cy", ballLocations[slideNumber].y);
+  //Draw home players
+  for (var p=0; p < HOME.players.length; p++) {
+    var id = HOME.players[p].id;
+    var player = d3.select("#home-player-" + id);
+    var location = ANIMATION_HISTORY.players.home[id].locations[slideNumber];
+    player // set player to initial position
+      .attr("transform", function(d) { d.x = location.x; d.y = location.y; return "translate(" + d.x + "," + d.y + ")" });
+  }
+  //Draw away players
+  for (var p=0; p < AWAY.players.length; p++) {
+    var id = AWAY.players[p].id;
+    var player = d3.select("#away-player-" + id);
+    var location = ANIMATION_HISTORY.players.away[id].locations[slideNumber];
+    player // set player to initial position
+      .attr("transform", function(d) { d.x = location.x; d.y = location.y; return "translate(" + d.x + "," + d.y + ")" });
+  }
 }
