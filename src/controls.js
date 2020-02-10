@@ -36,4 +36,5 @@ function animationControls() {
 //attach event handlers to drawing buttons
 function drawingControls() {
   document.getElementById("draw-vertical-zones").onclick = function() {drawVerticalZones(FIELD_ID)};
+  document.getElementById("draw-attacking-zones").onclick = function() {drawAttackingZones(FIELD_ID)};
 }

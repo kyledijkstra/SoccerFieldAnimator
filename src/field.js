@@ -212,6 +212,125 @@ function drawVerticalZones(id) {
     VERTICAL_ZONES = !VERTICAL_ZONES;
 }
 
+function drawAttackingZones(id) {
+    if (!ATTACKING_ZONES) {
+        var field = d3.select(id);
+        //draw libero area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "libero-zone")
+            .attr("width", attackingZones.libero.width)
+            .attr("height", attackingZones.libero.height)
+            .attr("y", attackingZones.libero.y)
+            .attr("x", attackingZones.libero.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw left defender area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "left-def-zone")
+            .attr("width", attackingZones.defender.left.width)
+            .attr("height", attackingZones.defender.left.height)
+            .attr("y", attackingZones.defender.left.y)
+            .attr("x", attackingZones.defender.left.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw right defender area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "right-def-zone")
+            .attr("width", attackingZones.defender.right.width)
+            .attr("height", attackingZones.defender.right.height)
+            .attr("y", attackingZones.defender.right.y)
+            .attr("x", attackingZones.defender.right.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw holding mid area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "hold-mid-zone")
+            .attr("width", attackingZones.holdingMid.width)
+            .attr("height", attackingZones.holdingMid.height)
+            .attr("y", attackingZones.holdingMid.y)
+            .attr("x", attackingZones.holdingMid.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw left attacking mid area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "left-am-zone")
+            .attr("width", attackingZones.attackingMid.left.width)
+            .attr("height", attackingZones.attackingMid.left.height)
+            .attr("y", attackingZones.attackingMid.left.y)
+            .attr("x", attackingZones.attackingMid.left.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw right attacking mid area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "right-am-zone")
+            .attr("width", attackingZones.attackingMid.right.width)
+            .attr("height", attackingZones.attackingMid.right.height)
+            .attr("y", attackingZones.attackingMid.right.y)
+            .attr("x", attackingZones.attackingMid.right.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw playmaker area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "playmaker-zone")
+            .attr("width", attackingZones.playmaker.width)
+            .attr("height", attackingZones.playmaker.height)
+            .attr("y", attackingZones.playmaker.y)
+            .attr("x", attackingZones.playmaker.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw left fwd area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "left-fwd-zone")
+            .attr("width", attackingZones.wideFwd.left.width)
+            .attr("height", attackingZones.wideFwd.left.height)
+            .attr("y", attackingZones.wideFwd.left.y)
+            .attr("x", attackingZones.wideFwd.left.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw right fwd area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "right-fwd-zone")
+            .attr("width", attackingZones.wideFwd.right.width)
+            .attr("height", attackingZones.wideFwd.right.height)
+            .attr("y", attackingZones.wideFwd.right.y)
+            .attr("x", attackingZones.wideFwd.right.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+        //draw center fwd area
+        field.append("rect")
+            .attr("class", "attack-zone")
+            .attr("id", "center-fwd-zone")
+            .attr("width", attackingZones.centerFwd.width)
+            .attr("height", attackingZones.centerFwd.height)
+            .attr("y", attackingZones.centerFwd.y)
+            .attr("x", attackingZones.centerFwd.x)
+            .style("fill", "none")
+            .style("stroke", ATTACKING_ZONES_COLOR)
+            .style("stroke-width", 2);
+    } else {
+        d3.select(id).selectAll(".attack-zone").remove();
+    }
+    ATTACKING_ZONES = !ATTACKING_ZONES;
+}
+
 function dragball(d) {
     var xNew = d3.event.x,
         yNew = d3.event.y;

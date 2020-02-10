@@ -33,5 +33,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     },
     ANIMATION_HISTORY = {},
     ANIMATION_NUMBER = 0,
-    VERTICAL_ZONES = false;
+    VERTICAL_ZONES = false,
+    ATTACKING_ZONES = false,
+    ATTACKING_ZONES_COLOR = "black";
 var PLAYER_RADIUS = PLAYER_CIRCLE_SIZE * SIZE_MULT;
