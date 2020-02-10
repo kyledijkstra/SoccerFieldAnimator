@@ -30,6 +30,8 @@ function teamControls() {
 //attach event handlers to animation buttons
 function animationControls() {
   document.getElementById("play-animations").onclick = function() {playAnimations(CURRENT_ANIMATION, true)};
+  document.getElementById("step-fwd-animations").onclick = function() {stepAnimations("f")};
+  document.getElementById("step-bck-animations").onclick = function() {stepAnimations("b")};
   document.getElementById("add-animation").onclick = function() {addAnimation()};
 }
 

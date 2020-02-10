@@ -61,8 +61,61 @@ function addAnimation() {
   
 }
 
+function stepAnimations(dir) {
+  if ((dir === 'b' && CURRENT_ANIMATION === 0) || dir === 'f' && CURRENT_ANIMATION >= ANIMATION_HISTORY.ball.locations.length-1) return;
+  var duration = 2000,
+      delay = 0;
+  var secondAnimation;
+  if (dir === 'f') {
+    secondAnimation = CURRENT_ANIMATION+1;
+  } else if (dir === 'b' && CURRENT_ANIMATION !== 0) {
+    secondAnimation = CURRENT_ANIMATION-1;
+  }
+  // Draw ball 
+  var ballLocations = ANIMATION_HISTORY.ball.locations;
+  var ball = d3.select("#ball");
+  ball // set ball to initial position
+    .attr("cx", ballLocations[CURRENT_ANIMATION].x)
+    .attr("cy", ballLocations[CURRENT_ANIMATION].y);
+  ball  // wait then change the ball's location
+    .transition()
+    .duration(duration)
+    .delay(delay)
+    .attr("cx", ballLocations[secondAnimation].x)
+    .attr("cy", ballLocations[secondAnimation].y);
+  //Draw home players
+  for (var p=0; p < HOME.players.length; p++) {
+    var id = HOME.players[p].id;
+    var player = d3.select("#home-player-" + id);
+    var location = ANIMATION_HISTORY.players.home[id].locations[CURRENT_ANIMATION];
+    var location2 = ANIMATION_HISTORY.players.home[id].locations[secondAnimation];
+    player // set player to initial position
+      .attr("transform", function(d) { d.x = location.x; d.y = location.y; return "translate(" + d.x + "," + d.y + ")" });
+    player // wait then change the player's location
+      .transition()
+      .duration(duration)
+      .delay(delay)
+      .attr("transform", function(d) { d.x = location2.x; d.y = location2.y; return "translate(" + d.x + "," + d.y + ")" });
+  }
+  //Draw away players
+  for (var p=0; p < AWAY.players.length; p++) {
+    var id = AWAY.players[p].id;
+    var player = d3.select("#away-player-" + id);
+    var location = ANIMATION_HISTORY.players.away[id].locations[CURRENT_ANIMATION];
+    var location2 = ANIMATION_HISTORY.players.away[id].locations[secondAnimation];
+    player // set player to initial position
+      .attr("transform", function(d) { d.x = location.x; d.y = location.y; return "translate(" + d.x + "," + d.y + ")" });
+    player  // wait then change the player's location
+      .transition()
+      .duration(duration)
+      .delay(delay)
+      .attr("transform", function(d) { d.x = location2.x; d.y = location2.y; return "translate(" + d.x + "," + d.y + ")" });
+  }
+  dir === 'f' ? CURRENT_ANIMATION++ : CURRENT_ANIMATION--;
+}
+
 function playAnimations() {
-  var duration = 1000,
+  var duration = 2000,
       delay = 2000;
   for (var a=0; a < ANIMATION_HISTORY.ball.locations.length; a++) {
     // Draw ball
@@ -113,6 +166,7 @@ function playAnimations() {
       }
     }
   }
+  CURRENT_ANIMATION = 0;
 }
 
 function writeAnimationList() {

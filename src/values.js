@@ -1,6 +1,6 @@
 //GLOBAL VARIABLES
 var FIELD_DIMENSIONS = {length: 120, width: 80},
-    SIZE_MULT = 10,
+    SIZE_MULT = 6,
     SIDELINE_MARGIN = 20,
     MARGIN_TOP = 0,
     FIELD_ID = "#tracker",
