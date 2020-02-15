@@ -1,11 +1,17 @@
 //GLOBAL VARIABLES
 var FIELD_DIMENSIONS = {length: 120, width: 80},
-    SIZE_MULT = 6,
-    SIDELINE_MARGIN = 20,
+    SIZE_MULT = 8.5,
     MARGIN_TOP = 0,
     FIELD_ID = "#tracker",
-    FIELD_LENGTH = (FIELD_DIMENSIONS.length * SIZE_MULT) + (2 * SIDELINE_MARGIN),
-    FIELD_WIDTH = (FIELD_DIMENSIONS.width * SIZE_MULT) + (2 * SIDELINE_MARGIN),
+    // SIDELINE_MARGIN = 20,
+    // FIELD_LENGTH = (FIELD_DIMENSIONS.length * SIZE_MULT) + (2 * SIDELINE_MARGIN),
+    // FIELD_WIDTH = (FIELD_DIMENSIONS.width * SIZE_MULT) + (2 * SIDELINE_MARGIN),
+    FIELD_LENGTH = 1280,
+    FIELD_WIDTH = 720,
+    SIDELINE_MARGIN = {
+        top: (FIELD_WIDTH - (FIELD_DIMENSIONS.width * SIZE_MULT))/2,
+        side: (FIELD_LENGTH - (FIELD_DIMENSIONS.length * SIZE_MULT))/2
+    }
     FIELD_COLOR = "#3cb25b",
     FIELD_COLOR_ALT = "#33994e",
     LINE_COLOR = "white",
@@ -25,7 +31,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         playerIdTracker: 11,
         players: []
     },
-    COLORS = ["black", "blue", "chartreuse", "cyan", "darkblue", "lightcoral", "magenta", "maroon", "orange", "plum", "purple", "red", "white", "yellow"],
+    COLORS = ["black", "white", "yellow", "blue", "skyblue", "cyan", "darkblue", "orange", "red", "maroon", "lightcoral", "magenta", "plum", "purple", "chartreuse"],
     PLAYER_CIRCLE_SIZE = 1.75,
     BALL_POSITION = {
         x: FIELD_LENGTH / 2,

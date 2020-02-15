@@ -19,9 +19,9 @@ function drawAlternatingField(id) {
         field.append("rect")
             .attr("class", "alt-field-color-" + i)
             .attr("width", 6 * SIZE_MULT)
-            .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
-            .attr("x", SIDELINE_MARGIN + MARGIN_TOP + (i * 6 * SIZE_MULT))
-            .attr("y", SIDELINE_MARGIN)
+            .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN.top))
+            .attr("x", SIDELINE_MARGIN.side + MARGIN_TOP + (i * 6 * SIZE_MULT))
+            .attr("y", SIDELINE_MARGIN.top)
             .style("fill", FIELD_COLOR_ALT);
     }
 }
@@ -33,10 +33,10 @@ function drawFieldLines(id) {
     //draw sidelines
     field.append("rect")
         .attr("class", "sidelines")
-        .attr("width", FIELD_LENGTH - (2 * SIDELINE_MARGIN))
-        .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN))
-        .attr("x", SIDELINE_MARGIN)
-        .attr("y", SIDELINE_MARGIN + MARGIN_TOP)
+        .attr("width", FIELD_LENGTH - (2 * SIDELINE_MARGIN.side))
+        .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN.top))
+        .attr("x", SIDELINE_MARGIN.side)
+        .attr("y", SIDELINE_MARGIN.top + MARGIN_TOP)
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -45,9 +45,9 @@ function drawFieldLines(id) {
         .attr("class", "center-line")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2)  
-        .attr("y1", SIDELINE_MARGIN)
+        .attr("y1", SIDELINE_MARGIN.top)
         .attr("x1", FIELD_LENGTH / 2)      
-        .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN)
+        .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
         .attr("x2", FIELD_LENGTH / 2);
     //draw center circle
     field.append("circle")
@@ -71,7 +71,7 @@ function drawFieldLines(id) {
         .attr("width", 18 * SIZE_MULT)
         .attr("height", 44 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
-        .attr("x", SIDELINE_MARGIN)
+        .attr("x", SIDELINE_MARGIN.side)
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -81,7 +81,7 @@ function drawFieldLines(id) {
         .attr("height", 44 * SIZE_MULT)
         .attr("width", 18 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
-        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT))
+        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN.side - (18 * SIZE_MULT))
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -92,7 +92,7 @@ function drawFieldLines(id) {
         .attr("width", 6 * SIZE_MULT)
         .attr("height", 20 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
-        .attr("x", SIDELINE_MARGIN)
+        .attr("x", SIDELINE_MARGIN.side)
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -102,7 +102,7 @@ function drawFieldLines(id) {
         .attr("width", 6 * SIZE_MULT)
         .attr("height", 20 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
-        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN - (6 * SIZE_MULT))
+        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN.side - (6 * SIZE_MULT))
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2);
@@ -112,14 +112,14 @@ function drawFieldLines(id) {
         .attr("class", "left-pk")
         .style("fill", LINE_COLOR) 
         .attr("cy", FIELD_WIDTH / 2)
-        .attr("cx", SIDELINE_MARGIN + (12 * SIZE_MULT))      
+        .attr("cx", SIDELINE_MARGIN.side + (12 * SIZE_MULT))      
         .attr("r", .4 * SIZE_MULT);
     //draw right PK spot
     field.append("circle")
         .attr("class", "right-pk")
         .style("fill", LINE_COLOR) 
         .attr("cy", FIELD_WIDTH / 2)
-        .attr("cx", FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT))  
+        .attr("cx", FIELD_LENGTH - SIDELINE_MARGIN.side - (12 * SIZE_MULT))  
         .attr("r", .4 * SIZE_MULT);
 
     //draw left D
@@ -134,7 +134,7 @@ function drawFieldLines(id) {
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
         .attr("d", leftd)
-        .attr("transform", "translate(" + (SIDELINE_MARGIN + (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");
+        .attr("transform", "translate(" + (SIDELINE_MARGIN.side + (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");
     //draw right D
     var rightd = d3.arc()
         .innerRadius(SIZE_MULT*10)
@@ -147,7 +147,7 @@ function drawFieldLines(id) {
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
         .attr("d", rightd)
-        .attr("transform", "translate(" + (FIELD_LENGTH-SIDELINE_MARGIN - (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");   
+        .attr("transform", "translate(" + (FIELD_LENGTH-SIDELINE_MARGIN.side - (12 * SIZE_MULT)) + ", " + ((FIELD_WIDTH/2)+MARGIN_TOP) + ")");   
         
     //draw ball
     field.append("circle")
@@ -173,9 +173,9 @@ function drawVerticalZones(id) {
             .style("stroke", LINE_COLOR)
             .style("stroke-width", 2)
             .attr("y1", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
-            .attr("x1", SIDELINE_MARGIN)
+            .attr("x1", SIDELINE_MARGIN.side)
             .attr("y2", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
-            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN);
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN.side);
         //draw line between left hs and center
         field.append("line")
             .attr("class", "vert-zone-line")
@@ -183,9 +183,9 @@ function drawVerticalZones(id) {
             .style("stroke", LINE_COLOR)
             .style("stroke-width", 2)
             .attr("y1", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
-            .attr("x1", SIDELINE_MARGIN + (18 * SIZE_MULT))
+            .attr("x1", SIDELINE_MARGIN.side + (18 * SIZE_MULT))
             .attr("y2", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
-            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT));
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN.side - (18 * SIZE_MULT));
         //draw line between right hs and center
         field.append("line")
             .attr("class", "vert-zone-line")
@@ -193,9 +193,9 @@ function drawVerticalZones(id) {
             .style("stroke", LINE_COLOR)
             .style("stroke-width", 2)
             .attr("y1", (FIELD_WIDTH / 2) + (10 * SIZE_MULT))
-            .attr("x1", SIDELINE_MARGIN + (18 * SIZE_MULT))
+            .attr("x1", SIDELINE_MARGIN.side + (18 * SIZE_MULT))
             .attr("y2", (FIELD_WIDTH / 2) + (10 * SIZE_MULT))
-            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN - (18 * SIZE_MULT));
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN.side - (18 * SIZE_MULT));
         //draw line between right wing and right hs
         field.append("line")
             .attr("class", "vert-zone-line")
@@ -203,9 +203,9 @@ function drawVerticalZones(id) {
             .style("stroke", LINE_COLOR)
             .style("stroke-width", 2)
             .attr("y1", (FIELD_WIDTH / 2) + (22 * SIZE_MULT))
-            .attr("x1", SIDELINE_MARGIN)
+            .attr("x1", SIDELINE_MARGIN.side)
             .attr("y2", (FIELD_WIDTH / 2) + (22 * SIZE_MULT))
-            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN);  
+            .attr("x2", FIELD_LENGTH - SIDELINE_MARGIN.side);  
     } else {
         d3.select(id).selectAll(".vert-zone-line").remove();
     }

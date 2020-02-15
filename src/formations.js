@@ -1,12 +1,12 @@
-var halfFieldWidth  = ((FIELD_WIDTH - (2 * SIDELINE_MARGIN)) / 2) + SIDELINE_MARGIN;
-var halfFieldLength = ((FIELD_LENGTH - (2 * SIDELINE_MARGIN)) / 2) + SIDELINE_MARGIN;
+var halfFieldWidth  = ((FIELD_WIDTH - (2 * SIDELINE_MARGIN.top)) / 2) + SIDELINE_MARGIN.top;
+var halfFieldLength = ((FIELD_LENGTH - (2 * SIDELINE_MARGIN.side)) / 2) + SIDELINE_MARGIN.side;
 
 var homeFrontLine = halfFieldLength - PLAYER_RADIUS - SIZE_MULT;
-var homeBackLine = (19 * SIZE_MULT) + SIDELINE_MARGIN + PLAYER_RADIUS;
+var homeBackLine = (19 * SIZE_MULT) + SIDELINE_MARGIN.side + PLAYER_RADIUS;
 var homeFrontBackGap = homeFrontLine - homeBackLine;
 
 var awayFrontLine = halfFieldLength + PLAYER_RADIUS + SIZE_MULT;
-var awayBackLine = FIELD_LENGTH - SIDELINE_MARGIN - (19 * SIZE_MULT) - PLAYER_RADIUS;
+var awayBackLine = FIELD_LENGTH - SIDELINE_MARGIN.side - (19 * SIZE_MULT) - PLAYER_RADIUS;
 var awayFrontBackGap = awayBackLine - awayFrontLine;
 
 var topWingHS = (FIELD_WIDTH / 2) - (22 * SIZE_MULT),
@@ -14,75 +14,75 @@ var topWingHS = (FIELD_WIDTH / 2) - (22 * SIZE_MULT),
     bottomCenterHS = (FIELD_WIDTH / 2) + (10 * SIZE_MULT),
     bottomHSWing = (FIELD_WIDTH / 2) + (22 * SIZE_MULT);
 var vertZones = {
-  topWing: (SIDELINE_MARGIN + topWingHS) / 2,
+  topWing: (SIDELINE_MARGIN.top + topWingHS) / 2,
   topHalfspace: (topWingHS + topHSCenter) / 2,
   center: halfFieldWidth,
   bottomHalfspace: (bottomCenterHS + bottomHSWing) / 2,
-  bottomWing: (bottomHSWing + (FIELD_WIDTH - SIDELINE_MARGIN)) / 2
+  bottomWing: (bottomHSWing + (FIELD_WIDTH - SIDELINE_MARGIN.top)) / 2
 };
 var attackingZones = {
   libero: {
-    x: SIDELINE_MARGIN + (12 * SIZE_MULT),
+    x: SIDELINE_MARGIN.side + (12 * SIZE_MULT),
     y: topHSCenter,
     height: 20 * SIZE_MULT,
     width: 12 * SIZE_MULT
   },
   defender: {
     left: {
-      x: SIDELINE_MARGIN + (18 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (18 * SIZE_MULT),
       y: vertZones.topWing,
       height: vertZones.topHalfspace - vertZones.topWing,
       width: 12 * SIZE_MULT
     },
     right: {
-      x: SIDELINE_MARGIN + (18 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (18 * SIZE_MULT),
       y: vertZones.bottomHalfspace,
       height: vertZones.topHalfspace - vertZones.topWing,
       width: 12 * SIZE_MULT
     }
   },
   holdingMid: {
-    x: SIDELINE_MARGIN + (30 * SIZE_MULT),
+    x: SIDELINE_MARGIN.side + (30 * SIZE_MULT),
     y: topHSCenter,
     height: 20 * SIZE_MULT,
     width: 12 * SIZE_MULT
   },
   attackingMid: {
     left: {
-      x: SIDELINE_MARGIN + (36 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (36 * SIZE_MULT),
       y: vertZones.topWing,
       height: vertZones.topHalfspace - vertZones.topWing,
       width: 18 * SIZE_MULT
     },
     right: {
-      x: SIDELINE_MARGIN + (36 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (36 * SIZE_MULT),
       y: vertZones.bottomHalfspace,
       height: vertZones.topHalfspace - vertZones.topWing,
       width: 18 * SIZE_MULT
     }
   },
   playmaker: {
-    x: SIDELINE_MARGIN + (48 * SIZE_MULT),
+    x: SIDELINE_MARGIN.side + (48 * SIZE_MULT),
     y: topHSCenter,
     height: 20 * SIZE_MULT,
     width: 12 * SIZE_MULT
   },
   wideFwd: {
     left: {
-      x: SIDELINE_MARGIN + (60 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (60 * SIZE_MULT),
       y: vertZones.topWing,
       height: vertZones.topHalfspace - vertZones.topWing,
       width: 12 * SIZE_MULT
     },
     right: {
-      x: SIDELINE_MARGIN + (60 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (60 * SIZE_MULT),
       y: vertZones.bottomHalfspace,
       height: vertZones.topHalfspace - vertZones.topWing,
       width: 12 * SIZE_MULT
     }
   },
   centerFwd: {
-    x: SIDELINE_MARGIN + (66 * SIZE_MULT),
+    x: SIDELINE_MARGIN.side + (66 * SIZE_MULT),
     y: topHSCenter,
     height: 20 * SIZE_MULT,
     width: 12 * SIZE_MULT
@@ -95,7 +95,7 @@ var homePositions = {
   CCy: halfFieldWidth,
   RCy: halfFieldWidth + (halfFieldWidth / 3),
   RWy: halfFieldWidth + (2 * (halfFieldWidth / 3)),
-  GKx: SIDELINE_MARGIN + (6 * SIZE_MULT),
+  GKx: SIDELINE_MARGIN.side + (6 * SIZE_MULT),
   LIx: homeBackLine - (homeFrontBackGap * 0.15),
   DFx: homeBackLine,
   DMx: homeBackLine + (homeFrontBackGap * 0.25),
@@ -110,7 +110,7 @@ var awayPositions = {
   CCy: halfFieldWidth,
   LCy: halfFieldWidth + (halfFieldWidth / 3),
   LWy: halfFieldWidth + (2 * (halfFieldWidth / 3)),
-  GKx: FIELD_LENGTH - SIDELINE_MARGIN - (6 * SIZE_MULT),
+  GKx: FIELD_LENGTH - SIDELINE_MARGIN.side - (6 * SIZE_MULT),
   LIx: awayBackLine + (homeFrontBackGap * 0.15),
   DFx: awayBackLine,
   DMx: awayBackLine - (awayFrontBackGap * 0.25),
@@ -221,11 +221,11 @@ var FORMATIONS = {
       {y: homePositions.RCy, x: homePositions.DFx, number: 4, id: 3},
       {y: homePositions.LCy, x: homePositions.DFx, number: 5, id: 4},
       {y: homePositions.CCy, x: homePositions.DMx, number: 6, id: 5},
-      {y: homePositions.RWy, x: homePositions.CMx, number: 7, id: 6},
-      {y: homePositions.CCy, x: homePositions.AMx, number: 8, id: 7},
+      {y: homePositions.RCy, x: homePositions.CMx, number: 7, id: 6},
+      {y: homePositions.LCy, x: homePositions.CMx, number: 8, id: 7},
       {y: homePositions.RCy, x: homePositions.STx, number: 9, id: 8},
-      {y: homePositions.LCy, x: homePositions.STx, number: 10, id: 9},
-      {y: homePositions.LWy, x: homePositions.CMx, number: 11, id: 10}
+      {y: homePositions.CCy, x: homePositions.AMx, number: 10, id: 9},
+      {y: homePositions.LCy, x: homePositions.STx, number: 11, id: 10}
     ],
     away: [
       {y: awayPositions.CCy, x: awayPositions.GKx, number: 1, id: 0},
@@ -234,11 +234,11 @@ var FORMATIONS = {
       {y: awayPositions.RCy, x: awayPositions.DFx, number: 4, id: 3},
       {y: awayPositions.LCy, x: awayPositions.DFx, number: 5, id: 4},
       {y: awayPositions.CCy, x: awayPositions.DMx, number: 6, id: 5},
-      {y: awayPositions.RWy, x: awayPositions.CMx, number: 7, id: 6},
-      {y: awayPositions.CCy, x: awayPositions.AMx, number: 8, id: 7},
+      {y: awayPositions.RCy, x: awayPositions.CMx, number: 7, id: 6},
+      {y: awayPositions.LCy, x: awayPositions.CMx, number: 8, id: 7},
       {y: awayPositions.RCy, x: awayPositions.STx, number: 9, id: 8},
-      {y: awayPositions.LCy, x: awayPositions.STx, number: 10, id: 9},
-      {y: awayPositions.LWy, x: awayPositions.CMx, number: 11, id: 10}
+      {y: awayPositions.CCy, x: awayPositions.AMx, number: 10, id: 9},
+      {y: awayPositions.LCy, x: awayPositions.STx, number: 11, id: 10}
     ]
   },
   FOUR_TWO_THREE_ONE: {

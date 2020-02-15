@@ -18,7 +18,7 @@ function addPlayer(team, individual) {
     if (individual) {
       HOME.players.push({
         x: FIELD_WIDTH / 2,
-        y: SIDELINE_MARGIN + (12 * SIZE_MULT),
+        y: SIDELINE_MARGIN.top + (12 * SIZE_MULT),
         number: smallestAvailableNumber(HOME.players),
         name: '',
         id: HOME.playerIdTracker++
@@ -65,7 +65,7 @@ function addPlayer(team, individual) {
     if (individual) {
       AWAY.players.push({
         x: FIELD_WIDTH / 2,
-        y: FIELD_LENGTH - SIDELINE_MARGIN - (12 * SIZE_MULT),
+        y: FIELD_LENGTH - SIDELINE_MARGIN.top - (12 * SIZE_MULT),
         number: smallestAvailableNumber(AWAY.players),
         name: '',
         id: AWAY.playerIdTracker++
