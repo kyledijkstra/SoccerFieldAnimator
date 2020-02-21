@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Lato|Rubik|Montserrat" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Lato|Rubik|Montserrat|Roboto" rel="stylesheet"> 
     <title>Tactics Board</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="actions.js"></script>
     <script type="text/javascript" src="colors.js"></script>
     <script type="text/javascript" src="controls.js"></script>
+    <script type="text/javascript" src="drawing.js"></script>
     <script type="text/javascript" src="field.js"></script>
     <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="values.js"></script>
@@ -69,13 +70,17 @@
                 </tr>
                 <tr>
                     <td>Player Color:</td>
-                    <td><select id="home-team-color"></select></td>
-                    <td><select id="away-team-color"></select></td>
+                    <!-- <td><select id="home-team-color"></select></td>
+                    <td><select id="away-team-color"></select></td> -->
+                    <td><input id="home-team-color" value="black"></input></td>
+                    <td><input id="away-team-color" value="white"></input></td>
                 </tr>
                 <tr>
                     <td>Number Color:</td>
-                    <td><select id="home-num-color"></select></td>
-                    <td><select id="away-num-color"></select></td>
+                    <!-- <td><select id="home-num-color"></select></td>
+                    <td><select id="away-num-color"></select></td> -->
+                    <td><input id="home-num-color" value="white"></input></td>
+                    <td><input id="away-num-color" value="black"></input></td>
                 </tr>
                 <tr>
                     <td>Formation:</td>
@@ -119,13 +124,32 @@
             <ul id="animation-history"></ul>
         </div>
         <br><br>
-        <div class="child" id="drawing">
+        <div class="child" id="drawing-options">
             <table>
                 <tr>
                     <td><h3>Drawing</h3></td>
-                    <td><button class="title-btn" id="draw-vertical-zones" type="button">Vertical Zones</button></td>
-                    <td><button class="title-btn" id="draw-attacking-zones" type="button">Attacking Zones</button></td>
-                </tr>  
+                    <td><button class="title-btn" id="draw-vertical-zones" type="button">Vertical Zones</button><button class="title-btn" id="draw-attacking-zones" type="button">Attacking Zones</button><button class="title-btn" id="remove-drawings" type="button">Remove Drawings</button></td>
+                </tr>
+                <tr>
+                    <td>Drawing:</td>
+                    <td><input type="checkbox" id="drawing" name="drawing" value="drawing"></td>
+                </tr>
+                <tr>
+                    <td>Lines:</td>
+                    <td>Color: <input id="line-color" value="black"></input><button id="change-line-color" type="button">Change</button></td>
+                    <td><input type="checkbox" id="line" name="line" value="straight-line"><label for="line">Line</label></td>
+                    <td><input type="checkbox" id="dash" name="dash" value="dashed"><label for="dash">Dash</label></td>
+                    <td><input type="checkbox" id="arrow" name="arrow" value="arrow"><label for="arrow">Arrow</label></td>
+                </tr>
+                <tr>
+                    <td>Shapes:</td>
+                    <td>Color: <input id="shape-color" value="black"></input><button id="change-shape-color" type="button">Change</button></td>
+                    <td><input type="checkbox" id="square" name="square" value="square"><label for="square">Square</label></td>
+                    <td><input type="checkbox" id="circle" name="circle" value="circle"><label for="circle">Circle</label></td>
+                    <td><input type="checkbox" id="fill" name="fill" value="fill"><label for="fill">Fill</label></td>
+                    <td><input type="checkbox" id="border" name="border" value="border"><label for="border">Border</label></td>
+                    <td><input type="checkbox" id="shape-dash" name="shape-dash" value="shape-dash"><label for="shape-dash">Dash</label></td>
+                </tr>
             </table>
         </div>
     </div>

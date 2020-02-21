@@ -39,4 +39,19 @@ function animationControls() {
 function drawingControls() {
   document.getElementById("draw-vertical-zones").onclick = function() {drawVerticalZones(FIELD_ID)};
   document.getElementById("draw-attacking-zones").onclick = function() {drawAttackingZones(FIELD_ID)};
+  document.getElementById("remove-drawings").onclick = function() {removeDrawings(FIELD_ID)};
+
+  document.getElementById("drawing").onchange  = function() {DRAWING.enabled = document.getElementById("drawing").checked;};
+  document.getElementById("change-line-color").onclick = function() {DRAWING.lineColor = document.getElementById("line-color").value;};
+  document.getElementById("change-shape-color").onclick = function() {DRAWING.shapeColor = document.getElementById("shape-color").value;};
+
+  document.getElementById("line").onchange  = function() {DRAWING.line  = document.getElementById("line").checked;};
+  document.getElementById("dash").onchange  = function() {DRAWING.dash  = document.getElementById("dash").checked;};
+  document.getElementById("arrow").onchange = function() {DRAWING.arrow = document.getElementById("arrow").checked;};
+
+  document.getElementById("square").onchange     = function() {DRAWING.square      = document.getElementById("square").checked;};
+  document.getElementById("circle").onchange     = function() {DRAWING.circle      = document.getElementById("circle").checked;};
+  document.getElementById("fill").onchange       = function() {DRAWING.shapeFill   = document.getElementById("fill").checked;};
+  document.getElementById("border").onchange     = function() {DRAWING.shapeBorder = document.getElementById("border").checked;};
+  document.getElementById("shape-dash").onchange = function() {DRAWING.shapeDash   = document.getElementById("shape-dash").checked;};
 }

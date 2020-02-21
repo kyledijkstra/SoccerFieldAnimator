@@ -249,9 +249,9 @@ var FORMATIONS = {
       {y: homePositions.LWy, x: homePositions.DFx, number: 3, id: 2},
       {y: homePositions.RCy, x: homePositions.DFx, number: 4, id: 3},
       {y: homePositions.LCy, x: homePositions.DFx, number: 5, id: 4},
-      {y: homePositions.LCy, x: homePositions.DMx, number: 6, id: 5},
+      {y: homePositions.LCy, x: homePositions.CMx, number: 6, id: 5},
       {y: homePositions.RWy, x: homePositions.AMx, number: 7, id: 6},
-      {y: homePositions.RCy, x: homePositions.DMx, number: 8, id: 7},
+      {y: homePositions.RCy, x: homePositions.CMx, number: 8, id: 7},
       {y: homePositions.CCy, x: homePositions.STx, number: 9, id: 8},
       {y: homePositions.CCy, x: homePositions.AMx, number: 10, id: 9},
       {y: homePositions.LWy, x: homePositions.AMx, number: 11, id: 10}
@@ -262,9 +262,9 @@ var FORMATIONS = {
       {y: awayPositions.LWy, x: awayPositions.DFx, number: 3, id: 2},
       {y: awayPositions.RCy, x: awayPositions.DFx, number: 4, id: 3},
       {y: awayPositions.LCy, x: awayPositions.DFx, number: 5, id: 4},
-      {y: awayPositions.LCy, x: awayPositions.DMx, number: 6, id: 5},
+      {y: awayPositions.LCy, x: awayPositions.CMx, number: 6, id: 5},
       {y: awayPositions.RWy, x: awayPositions.AMx, number: 7, id: 6},
-      {y: awayPositions.RCy, x: awayPositions.DMx, number: 8, id: 7},
+      {y: awayPositions.RCy, x: awayPositions.CMx, number: 8, id: 7},
       {y: awayPositions.CCy, x: awayPositions.STx, number: 9, id: 8},
       {y: awayPositions.CCy, x: awayPositions.AMx, number: 10, id: 9},
       {y: awayPositions.LWy, x: awayPositions.AMx, number: 11, id: 10}
@@ -396,9 +396,9 @@ var FORMATIONS = {
       {y: homePositions.LCy, x: homePositions.DFx, number: 5, id: 4},
       {y: homePositions.CCy, x: homePositions.DFx, number: 6, id: 5},
       {y: homePositions.RCy, x: homePositions.AMx, number: 7, id: 6},
-      {y: homePositions.RCy, x: homePositions.DMx, number: 8, id: 7},
+      {y: homePositions.RCy, x: homePositions.CMx, number: 8, id: 7},
       {y: homePositions.CCy, x: homePositions.STx, number: 9, id: 8},
-      {y: homePositions.LCy, x: homePositions.DMx, number: 10, id: 9},
+      {y: homePositions.LCy, x: homePositions.CMx, number: 10, id: 9},
       {y: homePositions.LCy, x: homePositions.AMx, number: 11, id: 10}
     ],
     away: [
@@ -409,9 +409,9 @@ var FORMATIONS = {
       {y: awayPositions.LCy, x: awayPositions.DFx, number: 5, id: 4},
       {y: awayPositions.CCy, x: awayPositions.DFx, number: 6, id: 5},
       {y: awayPositions.RCy, x: awayPositions.AMx, number: 7, id: 6},
-      {y: awayPositions.RCy, x: awayPositions.DMx, number: 8, id: 7},
+      {y: awayPositions.RCy, x: awayPositions.CMx, number: 8, id: 7},
       {y: awayPositions.CCy, x: awayPositions.STx, number: 9, id: 8},
-      {y: awayPositions.LCy, x: awayPositions.DMx, number: 10, id: 9},
+      {y: awayPositions.LCy, x: awayPositions.CMx, number: 10, id: 9},
       {y: awayPositions.LCy, x: awayPositions.AMx, number: 11, id: 10}
     ]
   },

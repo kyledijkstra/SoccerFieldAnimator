@@ -47,7 +47,7 @@ function addPlayer(team, individual) {
       .attr("text-anchor", "middle")
       .style("fill", HOME.numColor)
       .style("font-size", 1.5 * SIZE_MULT + 7.5)
-      .style("font-family", "Rubik")
+      .style("font-family", FONT)
       .text(function(d) { return d.number })
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
@@ -58,7 +58,7 @@ function addPlayer(team, individual) {
       .attr("text-anchor", "middle")
       .style("fill", HOME.numColor)
       .style("font-size", 12)
-      .style("font-family", "Rubik")
+      .style("font-family", FONT)
       .attr("dy", "-1.25em")
       .text(function(d) { return d.name });
   } else {
@@ -94,7 +94,7 @@ function addPlayer(team, individual) {
       .attr("text-anchor", "middle")
       .style("fill", AWAY.numColor)
       .style("font-size", 1.5 * SIZE_MULT + 7.5)
-      .attr("font-family", "Rubik")
+      .attr("font-family", FONT)
       .text(function(d) { return d.number })
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
@@ -105,7 +105,7 @@ function addPlayer(team, individual) {
       .attr("text-anchor", "middle")
       .style("fill", AWAY.numColor)
       .style("font-size", 12)
-      .style("font-family", "Rubik")
+      .style("font-family", FONT)
       .attr("dy", "-1.25em")
       .text(function(d) { return d.name });
   }

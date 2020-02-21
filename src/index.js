@@ -8,7 +8,7 @@ $(document).ready(function() {
       //draw editable field for tracking events
       drawField(FIELD_ID);
       //add color options for teams
-      addColorOptions();
+      // addColorOptions();
       //add formation options for teams
       addFormationOptions();
       //event handlers

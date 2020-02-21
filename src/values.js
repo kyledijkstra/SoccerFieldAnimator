@@ -42,5 +42,20 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     CURRENT_ANIMATION = 0,
     VERTICAL_ZONES = false,
     ATTACKING_ZONES = false,
-    ATTACKING_ZONES_COLOR = "black";
+    ATTACKING_ZONES_COLOR = "black",
+    FONT = "Rubik",
+    DRAWING = {
+        enabled: false,
+        line: false,
+        dash: false,
+        arrow: false,
+        numberDrawings: 0,
+        lineColor: "black",
+        shapeColor: "black",
+        shapeFill: false,
+        shapeBorder: false,
+        shapeDash: false,
+        circle: false,
+        square: false
+    };
 var PLAYER_RADIUS = PLAYER_CIRCLE_SIZE * SIZE_MULT;
