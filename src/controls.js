@@ -21,12 +21,14 @@ function playerControls() {
 
 //change properties of team based off user selects
 function teamControls() {
-  document.getElementById("home-team-color").onchange     = function() {HOME.color = this.value;};
-  document.getElementById("home-num-color").onchange      = function() {HOME.numColor = this.value;};
-  document.getElementById("home-team-formation").onchange = function() {HOME.formation = this.value;};
-  document.getElementById("away-team-color").onchange     = function() {AWAY.color = this.value;};
-  document.getElementById("away-num-color").onchange      = function() {AWAY.numColor = this.value;};
-  document.getElementById("away-team-formation").onchange = function() {AWAY.formation = this.value;};
+  document.getElementById("home-team-color").onchange     = function() {HOME.color          = this.value;};
+  document.getElementById("home-sec-team-color").onchange = function() {HOME.colorSecondary = this.value;};
+  document.getElementById("home-num-color").onchange      = function() {HOME.numColor       = this.value;};
+  document.getElementById("home-team-formation").onchange = function() {HOME.formation      = this.value;};
+  document.getElementById("away-team-color").onchange     = function() {AWAY.color          = this.value;};
+  document.getElementById("away-sec-team-color").onchange = function() {AWAY.colorSecondary = this.value;};
+  document.getElementById("away-num-color").onchange      = function() {AWAY.numColor       = this.value;};
+  document.getElementById("away-team-formation").onchange = function() {AWAY.formation      = this.value;};
 }
 
 //attach event handlers to animation buttons
