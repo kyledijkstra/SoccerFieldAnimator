@@ -27,7 +27,7 @@ function drawAlternatingField(id) {
     for (var i=0; i<FIELD_DIMENSIONS.length/6; i=i+2) {
         //draw alternating field colors
         field.append("rect")
-            .attr("class", "alt-field-color-" + i)
+            .attr("id", "alt-field-color-" + i)
             .attr("width", 6 * SIZE_MULT)
             .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN.top))
             .attr("x", SIDELINE_MARGIN.side + MARGIN_TOP + (i * 6 * SIZE_MULT))
@@ -42,7 +42,8 @@ function drawFieldLines(id) {
 
     //draw sidelines
     field.append("rect")
-        .attr("class", "sidelines")
+        .attr("class", "field-marking")
+        .attr("id", "sidelines")
         .attr("width", FIELD_LENGTH - (2 * SIDELINE_MARGIN.side))
         .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN.top))
         .attr("x", SIDELINE_MARGIN.side)
@@ -52,7 +53,8 @@ function drawFieldLines(id) {
         .style("stroke-width", 2);
     //draw line through midfield
     field.append("line")
-        .attr("class", "center-line")
+        .attr("class", "field-marking")
+        .attr("id", "center-line")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2)  
         .attr("y1", SIDELINE_MARGIN.top)
@@ -61,7 +63,8 @@ function drawFieldLines(id) {
         .attr("x2", FIELD_LENGTH / 2);
     //draw center circle
     field.append("circle")
-        .attr("class", "center-circle")
+        .attr("class", "field-marking")
+        .attr("id", "center-circle")
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2)  
@@ -70,14 +73,16 @@ function drawFieldLines(id) {
         .attr("r", 10 * SIZE_MULT);
     // //draw center dot
     field.append("circle")
-        .attr("class", "center-dot")
+        .attr("class", "field-marking")
+        .attr("id", "center-dot")
         .style("fill", LINE_COLOR) 
         .attr("cx", FIELD_LENGTH / 2)
         .attr("cy", FIELD_WIDTH / 2)     
         .attr("r", .4 * SIZE_MULT);
     //draw left 18 yd box
     field.append("rect")
-        .attr("class", "left-eighteen")
+        .attr("class", "field-marking")
+        .attr("id", "left-eighteen")
         .attr("width", 18 * SIZE_MULT)
         .attr("height", 44 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
@@ -87,7 +92,8 @@ function drawFieldLines(id) {
         .style("stroke-width", 2);
     //draw right 18 yd box
     field.append("rect")
-        .attr("class", "right-eighteen")
+        .attr("class", "field-marking").attr("class", "field-marking")
+        .attr("id", "right-eighteen")
         .attr("height", 44 * SIZE_MULT)
         .attr("width", 18 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (22 * SIZE_MULT))
@@ -98,7 +104,8 @@ function drawFieldLines(id) {
 
     //draw left 6 yd box
     field.append("rect")
-        .attr("class", "left-six")
+        .attr("class", "field-marking")
+        .attr("id", "left-six")
         .attr("width", 6 * SIZE_MULT)
         .attr("height", 20 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
@@ -108,7 +115,8 @@ function drawFieldLines(id) {
         .style("stroke-width", 2);
     //draw right 6 yd box
     field.append("rect")
-        .attr("class", "right-six")
+        .attr("class", "field-marking")
+        .attr("id", "right-six")
         .attr("width", 6 * SIZE_MULT)
         .attr("height", 20 * SIZE_MULT)
         .attr("y", (FIELD_WIDTH / 2) - (10 * SIZE_MULT))
@@ -119,14 +127,16 @@ function drawFieldLines(id) {
 
     //draw left PK spot
     field.append("circle")
-        .attr("class", "left-pk")
+        .attr("class", "field-marking")
+        .attr("id", "left-pk")
         .style("fill", LINE_COLOR) 
         .attr("cy", FIELD_WIDTH / 2)
         .attr("cx", SIDELINE_MARGIN.side + (12 * SIZE_MULT))      
         .attr("r", .4 * SIZE_MULT);
     //draw right PK spot
     field.append("circle")
-        .attr("class", "right-pk")
+        .attr("class", "field-marking")
+        .attr("id", "right-pk")
         .style("fill", LINE_COLOR) 
         .attr("cy", FIELD_WIDTH / 2)
         .attr("cx", FIELD_LENGTH - SIDELINE_MARGIN.side - (12 * SIZE_MULT))  
@@ -139,7 +149,8 @@ function drawFieldLines(id) {
         .startAngle(37*(Math.PI/180))
         .endAngle(143*(Math.PI/180));
     field.append("path")
-        .attr("class", "left-d")
+        .attr("class", "field-marking")
+        .attr("id", "left-d")
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 
@@ -152,7 +163,8 @@ function drawFieldLines(id) {
         .startAngle(217*(Math.PI/180))
         .endAngle(323*(Math.PI/180));
     field.append("path")
-        .attr("class", "right-d")
+        .attr("class", "field-marking")
+        .attr("id", "right-d")
         .style("fill", "none")
         .style("stroke", LINE_COLOR)
         .style("stroke-width", 2) 

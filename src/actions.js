@@ -231,8 +231,11 @@ function updatePlayerNumber(number, id, team) {
       var player = HOME.players[i];
       if (player.id === id) {
         HOME.players[i].number = number;
-        d3.selectAll("#home-player-number-" + player.id)
-          .text(number);
+        if (number > 0) {
+          d3.selectAll("#home-player-number-" + player.id).text(number);
+        } else {
+          d3.selectAll("#home-player-number-" + player.id).text('');
+        }
       }
     }
   } else {
@@ -240,8 +243,11 @@ function updatePlayerNumber(number, id, team) {
       var player = AWAY.players[i];
       if (player.id === id) {
         AWAY.players[i].number = number;
-        d3.selectAll("#away-player-number-" + player.id)
-          .text(number);
+        if (number > 0) {
+          d3.selectAll("#away-player-number-" + player.id).text(number);
+        } else {
+          d3.selectAll("#away-player-number-" + player.id).text('');
+        }
       }
     }
   }
@@ -253,8 +259,7 @@ function updatePlayerName(name, id, team) {
       var player = HOME.players[i];
       if (player.id === id) {
         HOME.players[i].name = name;
-        d3.selectAll("#home-player-name-" + player.id)
-          .text(name);
+        d3.selectAll("#home-player-name-" + player.id).text(name);
       }
     }
   } else {
@@ -262,8 +267,7 @@ function updatePlayerName(name, id, team) {
       var player = AWAY.players[i];
       if (player.id === id) {
         AWAY.players[i].name = name;
-        d3.selectAll("#away-player-name-" + player.id)
-          .text(name);
+        d3.selectAll("#away-player-name-" + player.id).text(name);
       }
     }
   }

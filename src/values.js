@@ -44,6 +44,8 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     ATTACKING_ZONES = false,
     ATTACKING_ZONES_COLOR = "black",
     FONT = "Rubik",
+    TRAINING_MODE = false,
+    TRAINING_LINE_COLOR = "black"
     DRAWING = {
         enabled: false,
         line: false,

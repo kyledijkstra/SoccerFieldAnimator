@@ -7,6 +7,8 @@ function handlers() {
   animationControls();
   //drawing controls
   drawingControls();
+  //training controls
+  trainingControls();
 }
 
 //attach event handlers to player buttons
@@ -54,4 +56,21 @@ function drawingControls() {
   document.getElementById("fill").onchange       = function() {DRAWING.shapeFill   = document.getElementById("fill").checked;};
   document.getElementById("border").onchange     = function() {DRAWING.shapeBorder = document.getElementById("border").checked;};
   document.getElementById("shape-dash").onchange = function() {DRAWING.shapeDash   = document.getElementById("shape-dash").checked;};
+}
+
+//attach event handlers to training buttons
+function trainingControls() {
+  document.getElementById("training-mode").onchange = function() {trainingMode(FIELD_ID)};
+
+  document.getElementById("training-line-color").onchange = function() {TRAINING_LINE_COLOR = this.value;};
+
+  document.getElementById("vert-half").onchange  = function() {trainingLines(FIELD_ID, "v", 2, document.getElementById("vert-half").checked)};
+  document.getElementById("vert-third").onchange = function() {trainingLines(FIELD_ID, "v", 3, document.getElementById("vert-third").checked)};
+  document.getElementById("vert-quart").onchange = function() {trainingLines(FIELD_ID, "v", 4, document.getElementById("vert-quart").checked)};
+  document.getElementById("vert-quint").onchange = function() {trainingLines(FIELD_ID, "v", 5, document.getElementById("vert-quint").checked)};
+
+  document.getElementById("horiz-half").onchange  = function() {trainingLines(FIELD_ID, "h", 2, document.getElementById("horiz-half").checked)};
+  document.getElementById("horiz-third").onchange = function() {trainingLines(FIELD_ID, "h", 3, document.getElementById("horiz-third").checked)};
+  document.getElementById("horiz-quart").onchange = function() {trainingLines(FIELD_ID, "h", 4, document.getElementById("horiz-quart").checked)};
+  document.getElementById("horiz-quint").onchange = function() {trainingLines(FIELD_ID, "h", 5, document.getElementById("horiz-quint").checked)};
 }

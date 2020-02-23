@@ -71,8 +71,8 @@ function draw(s, e) {
         .attr("id", "drawing-" + DRAWING.numberDrawings)
         .attr("width", s.x > e.x ? s.x - e.x : e.x - s.x)
         .attr("height", s.y > e.y ? s.y - e.y : e.y - s.y)
-        .attr("x", s.x)
-        .attr("y", s.y)
+        .attr("x", s.x < e.x ? s.x : e.x)
+        .attr("y", s.y < e.y ? s.y : e.y)
         .style("fill", DRAWING.shapeFill ? DRAWING.shapeColor : "none")
         .style("stroke", DRAWING.shapeBorder ? DRAWING.shapeColor : "none")
         .style("stroke-width", DRAWING.shapeBorder ? 2 : 0);
@@ -257,4 +257,261 @@ function removeDrawings(field) {
   VERTICAL_ZONES = false;
   ATTACKING_ZONES = false;
   DRAWING.numberDrawings = 0;
+}
+
+function trainingMode(field) {
+  if (!TRAINING_MODE) {
+    //only keep sidelines
+    d3.select(field).selectAll(".field-marking").style("display", "none");
+    //increase player circle size
+    PLAYER_RADIUS = 2.25 * SIZE_MULT;
+
+    d3.select(field).append("rect")
+        .attr("class", "training-field-marking")
+        .attr("id", "sidelines")
+        .attr("width", FIELD_LENGTH - (2 * SIDELINE_MARGIN.side))
+        .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN.top))
+        .attr("x", SIDELINE_MARGIN.side)
+        .attr("y", SIDELINE_MARGIN.top + MARGIN_TOP)
+        .style("fill", "none")
+        .style("stroke", TRAINING_LINE_COLOR)
+        .style("stroke-width", 2);
+  } else {
+    d3.select(field).selectAll(".field-marking").style("display", "block");
+    d3.select(field).selectAll(".training-field-marking").remove();
+    PLAYER_RADIUS = PLAYER_CIRCLE_SIZE * SIZE_MULT;
+  }
+  TRAINING_MODE = !TRAINING_MODE;
+}
+
+function trainingLines(id, dir, num, enable) {
+  // if (!TRAINING_MODE) return;
+  var field = d3.select(id);
+
+  if (dir === "v") { //vertical
+    if (num === 2) {
+      if (!enable) { //disable vertical 1/2 lines
+        field.selectAll(".v2").remove();
+      } else { //draw vertical 1/2 lines
+        field.append("line")
+          .attr("class", "v2 training-field-marking")
+          .attr("id", "vert-center-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", FIELD_LENGTH / 2)      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", FIELD_LENGTH / 2);
+      }
+    } else if (num === 3) {
+      if (!enable) { //disable vertical 1/3 lines
+        field.selectAll(".v3").remove();
+      } else { //draw vertical 1/3 lines
+        field.append("line")
+          .attr("class", "v3 training-field-marking")
+          .attr("id", "vert-left-third-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (40 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (40 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "v3 training-field-marking")
+          .attr("id", "vert-right-third-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (80 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (80 * SIZE_MULT));
+      }
+    } else if (num === 4) {
+      if (!enable) { //disable vertical 1/4 lines
+        field.selectAll(".v4").remove();
+      } else {
+        field.append("line")
+          .attr("class", "v4 training-field-marking")
+          .attr("id", "vert-center-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", FIELD_LENGTH / 2)      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", FIELD_LENGTH / 2);
+        field.append("line")
+          .attr("class", "v4 training-field-marking")
+          .attr("id", "vert-right-fourth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (30 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (30 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "v4 training-field-marking")
+          .attr("id", "vert-right-fourth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (90 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (90 * SIZE_MULT));
+      }
+    } else if (num === 5) {
+      if (!enable) { //disable vertical 1/5 lines
+        field.selectAll(".v5").remove();
+      } else {
+        field.append("line")
+          .attr("class", "v5 training-field-marking")
+          .attr("id", "vert-left-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (24 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (24 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "v5 training-field-marking")
+          .attr("id", "vert-right-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (48 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (48 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "v5 training-field-marking")
+          .attr("id", "vert-left-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (72 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (72 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "v5 training-field-marking")
+          .attr("id", "vert-right-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top)
+          .attr("x1", SIDELINE_MARGIN.side + (96 * SIZE_MULT))      
+          .attr("y2", FIELD_WIDTH - SIDELINE_MARGIN.top)
+          .attr("x2", SIDELINE_MARGIN.side + (96 * SIZE_MULT));
+      }
+    }
+  } else if (dir === "h") { //horizontal
+    if (num === 2) {
+      if (!enable) { //disable horizontal 1/2 lines
+        field.selectAll(".h2").remove();
+      } else { //draw horizontal 1/2 lines
+        field.append("line")
+          .attr("class", "h2 training-field-marking")
+          .attr("id", "horiz-center-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (40 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (40 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+      }
+    } else if (num === 3) {
+      if (!enable) { //disable horizontal 1/3 lines
+        field.selectAll(".h3").remove();
+      } else { //draw horizontal 1/3 lines
+        field.append("line")
+          .attr("class", "h3 training-field-marking")
+          .attr("id", "horiz-left-third-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (80/3 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (80/3 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "h3 training-field-marking")
+          .attr("id", "horiz-right-third-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (160/3 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (160/3 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+      }
+    } else if (num === 4) {
+      if (!enable) { //disable horizontal 1/4 lines
+        field.selectAll(".h4").remove();
+      } else {
+        field.append("line")
+          .attr("class", "h4 training-field-marking")
+          .attr("id", "horiz-center-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (40 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (40 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "h4 training-field-marking")
+          .attr("id", "horiz-right-fourth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (20 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (20 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "h4 training-field-marking")
+          .attr("id", "horiz-right-fourth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (60 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (60 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+      }
+    } else if (num === 5) {
+      if (!enable) { //disable horizontal 1/5 lines
+        field.selectAll(".h5").remove();
+      } else {
+        field.append("line")
+          .attr("class", "h5 training-field-marking")
+          .attr("id", "horiz-left-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (16 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (16 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "h5 training-field-marking")
+          .attr("id", "horiz-right-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (32 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (32 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "h5 training-field-marking")
+          .attr("id", "horiz-left-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (48 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (48 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+        field.append("line")
+          .attr("class", "h5 training-field-marking")
+          .attr("id", "horiz-right-fifth-line")
+          .style("stroke", TRAINING_LINE_COLOR)
+          .style("stroke-width", 2)  
+          .attr("y1", SIDELINE_MARGIN.top + (64 * SIZE_MULT))
+          .attr("x1", SIDELINE_MARGIN.side)      
+          .attr("y2", SIDELINE_MARGIN.top + (64 * SIZE_MULT))
+          .attr("x2", SIDELINE_MARGIN.side + (120 * SIZE_MULT));
+      }
+    }
+  }
+  
 }
