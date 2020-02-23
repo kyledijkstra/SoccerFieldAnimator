@@ -68,7 +68,7 @@ function addPlayer(team, individual) {
       .attr("dominant-baseline", "text-top")
       .attr("text-anchor", "middle")
       .style("fill", HOME.numColor)
-      .style("font-size", 12)
+      .style("font-size", SIZE_MULT + 7.5)
       .style("font-family", FONT)
       .attr("dy", "-1.25em")
       .text(function(d) { return d.name });
@@ -126,7 +126,7 @@ function addPlayer(team, individual) {
       .attr("dominant-baseline", "text-top")
       .attr("text-anchor", "middle")
       .style("fill", AWAY.numColor)
-      .style("font-size", 12)
+      .style("font-size", SIZE_MULT + 7.5)
       .style("font-family", FONT)
       .attr("dy", "-1.25em")
       .text(function(d) { return d.name });
