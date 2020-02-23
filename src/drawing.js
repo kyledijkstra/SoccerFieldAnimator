@@ -20,18 +20,23 @@ function recordDrawing() {
 }
 
 function draw(s, e) {
+  if (Math.abs(s.x - e.x) <= 8 && Math.abs(s.y - e.y) <= 8) return; //don't draw tiny lines or shapes
   var field = d3.select(FIELD_ID);
 
   if (DRAWING.line) {
+    var newId = "drawing-" + DRAWING.numberDrawings;
     var line = field.append("line")
       .attr("class", "drawn line")
-      .attr("id", "drawing-" + DRAWING.numberDrawings)
+      .attr("id", newId)
       .attr("x1", s.x)
       .attr("y1", s.y)
       .attr("x2", e.x)
       .attr("y2", e.y)
       .style("stroke", DRAWING.lineColor)
-      .style("stroke-width", 2);
+      .style("stroke-width", 2)
+      .on("dblclick", function(d) {
+        field.selectAll("#" + newId).remove();
+      });
     if (DRAWING.dash) {
       line.style("stroke-dasharray", ("4, 5"));
     }
@@ -49,7 +54,7 @@ function draw(s, e) {
         .style("fill", DRAWING.lineColor);
       line.attr("marker-end","url(#triangle-" + DRAWING.numberDrawings + ")");
     }
-  } else if (DRAWING.circle || DRAWING.square) {
+  } else if ((DRAWING.circle || DRAWING.square) && (Math.abs(s.x - e.x) > 5 && Math.abs(s.y - e.y) > 5)) {
     if (DRAWING.circle) { //circle
       var centerX = (s.x + e.x) / 2,
           centerY = (s.y + e.y) / 2;
