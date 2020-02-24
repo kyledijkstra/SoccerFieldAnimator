@@ -23,69 +23,69 @@ var vertZones = {
 var attackingZones = {
   libero: {
     x: SIDELINE_MARGIN.side + (12 * SIZE_MULT),
-    y: topHSCenter,
-    height: 20 * SIZE_MULT,
-    width: 12 * SIZE_MULT
+    y: vertZones.topHalfspace,
+    height: vertZones.bottomHalfspace - vertZones.topHalfspace,
+    width: 15 * SIZE_MULT
   },
   defender: {
     left: {
-      x: SIDELINE_MARGIN.side + (18 * SIZE_MULT),
-      y: vertZones.topWing,
-      height: vertZones.topHalfspace - vertZones.topWing,
-      width: 12 * SIZE_MULT
-    },
-    right: {
-      x: SIDELINE_MARGIN.side + (18 * SIZE_MULT),
-      y: vertZones.bottomHalfspace,
-      height: vertZones.topHalfspace - vertZones.topWing,
-      width: 12 * SIZE_MULT
-    }
-  },
-  holdingMid: {
-    x: SIDELINE_MARGIN.side + (30 * SIZE_MULT),
-    y: topHSCenter,
-    height: 20 * SIZE_MULT,
-    width: 12 * SIZE_MULT
-  },
-  attackingMid: {
-    left: {
-      x: SIDELINE_MARGIN.side + (36 * SIZE_MULT),
-      y: vertZones.topWing,
-      height: vertZones.topHalfspace - vertZones.topWing,
+      x: SIDELINE_MARGIN.side + (15 * SIZE_MULT),
+      y: SIDELINE_MARGIN.top,
+      height: vertZones.topHalfspace - SIDELINE_MARGIN.top,
       width: 18 * SIZE_MULT
     },
     right: {
-      x: SIDELINE_MARGIN.side + (36 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (15 * SIZE_MULT),
       y: vertZones.bottomHalfspace,
-      height: vertZones.topHalfspace - vertZones.topWing,
+      height: vertZones.topHalfspace - SIDELINE_MARGIN.top,
+      width: 18 * SIZE_MULT
+    }
+  },
+  holdingMid: {
+    x: SIDELINE_MARGIN.side + (27 * SIZE_MULT),
+    y: vertZones.topHalfspace,
+    height: vertZones.bottomHalfspace - vertZones.topHalfspace,
+    width: 15 * SIZE_MULT
+  },
+  attackingMid: {
+    left: {
+      x: SIDELINE_MARGIN.side + (33 * SIZE_MULT),
+      y: SIDELINE_MARGIN.top,
+      height: vertZones.topHalfspace - SIDELINE_MARGIN.top,
+      width: 18 * SIZE_MULT
+    },
+    right: {
+      x: SIDELINE_MARGIN.side + (33 * SIZE_MULT),
+      y: vertZones.bottomHalfspace,
+      height: vertZones.topHalfspace - SIDELINE_MARGIN.top,
       width: 18 * SIZE_MULT
     }
   },
   playmaker: {
-    x: SIDELINE_MARGIN.side + (48 * SIZE_MULT),
-    y: topHSCenter,
-    height: 20 * SIZE_MULT,
-    width: 12 * SIZE_MULT
+    x: SIDELINE_MARGIN.side + (42 * SIZE_MULT),
+    y: vertZones.topHalfspace,
+    height: vertZones.bottomHalfspace - vertZones.topHalfspace,
+    width: 15 * SIZE_MULT
   },
   wideFwd: {
     left: {
-      x: SIDELINE_MARGIN.side + (60 * SIZE_MULT),
-      y: vertZones.topWing,
-      height: vertZones.topHalfspace - vertZones.topWing,
-      width: 12 * SIZE_MULT
+      x: SIDELINE_MARGIN.side + (51 * SIZE_MULT),
+      y: SIDELINE_MARGIN.top,
+      height: vertZones.topHalfspace - SIDELINE_MARGIN.top,
+      width: 18 * SIZE_MULT
     },
     right: {
-      x: SIDELINE_MARGIN.side + (60 * SIZE_MULT),
+      x: SIDELINE_MARGIN.side + (51 * SIZE_MULT),
       y: vertZones.bottomHalfspace,
-      height: vertZones.topHalfspace - vertZones.topWing,
-      width: 12 * SIZE_MULT
+      height: vertZones.topHalfspace - SIDELINE_MARGIN.top,
+      width: 18 * SIZE_MULT
     }
   },
   centerFwd: {
-    x: SIDELINE_MARGIN.side + (66 * SIZE_MULT),
-    y: topHSCenter,
-    height: 20 * SIZE_MULT,
-    width: 12 * SIZE_MULT
+    x: SIDELINE_MARGIN.side + (57 * SIZE_MULT),
+    y: vertZones.topHalfspace,
+    height: vertZones.bottomHalfspace - vertZones.topHalfspace,
+    width: 15 * SIZE_MULT
   }
 }
 
@@ -148,40 +148,6 @@ var FORMATIONS = {
       {y: awayPositions.LCy, x: awayPositions.CMx, number: 10, id: 9},
       {y: awayPositions.LWy, x: awayPositions.AMx, number: 11, id: 10}
     ]
-  },
-  TEST: {
-    name: "test",
-    home: [
-      {y: homePositions.CCy, x: homePositions.GKx, number: 1, id: 0},
-      {y: homePositions.RWy, x: homePositions.DMx, number: 2, id: 1},
-      {y: homePositions.LWy, x: homePositions.DMx, number: 3, id: 2},
-      {y: homePositions.RCy, x: homePositions.DFx, number: 4, id: 3},
-      {y: homePositions.LCy, x: homePositions.DFx, number: 5, id: 4},
-      {y: homePositions.CCy, x: homePositions.DMx, number: 6, id: 5},
-      {y: homePositions.RWy, x: homePositions.AMx, number: 7, id: 6},
-      {y: homePositions.RCy, x: homePositions.CMx, number: 8, id: 7},
-      {y: homePositions.RCy, x: homePositions.STx, number: 9, id: 8},
-      {y: homePositions.CCy, x: homePositions.AMx, number: 10, id: 9},
-      {y: homePositions.LCy, x: homePositions.CMx, number: 11, id: 10}
-    ],
-    away: []
-  },
-  TEST_TWO: {
-    name: "test2",
-    home: [
-      {y: homePositions.CCy, x: homePositions.GKx, number: 1, id: 0},
-      {y: homePositions.RWy, x: homePositions.DMx, number: 2, id: 1},
-      {y: homePositions.LCy, x: homePositions.DFx, number: 3, id: 2},
-      {y: homePositions.RCy, x: homePositions.DFx, number: 4, id: 3},
-      {y: homePositions.CCy, x: homePositions.LIx, number: 5, id: 4},
-      {y: homePositions.CCy, x: homePositions.DMx, number: 6, id: 5},
-      {y: homePositions.RWy, x: homePositions.AMx, number: 7, id: 6},
-      {y: homePositions.RCy, x: homePositions.CMx, number: 8, id: 7},
-      {y: homePositions.CCy, x: homePositions.STx, number: 9, id: 8},
-      {y: homePositions.LCy, x: homePositions.AMx, number: 10, id: 9},
-      {y: homePositions.LWy, x: homePositions.CMx, number: 11, id: 10}
-    ],
-    away: []
   },
   FOUR_FOUR_TWO: {
     name: "4-4-2",

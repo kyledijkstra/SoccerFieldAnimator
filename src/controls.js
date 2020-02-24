@@ -42,7 +42,8 @@ function animationControls() {
 //attach event handlers to drawing buttons
 function drawingControls() {
   document.getElementById("draw-vertical-zones").onclick = function() {drawVerticalZones(FIELD_ID)};
-  document.getElementById("draw-attacking-zones").onclick = function() {drawAttackingZones(FIELD_ID)};
+  document.getElementById("draw-attacking-zones").onclick = function() {drawAttackingZones(FIELD_ID, false)};
+  document.getElementById("move-attacking-zones").onclick = function() {drawAttackingZones(FIELD_ID, true)};
   document.getElementById("remove-drawings").onclick = function() {removeDrawings(FIELD_ID)};
 
   document.getElementById("drawing").onchange  = function() {DRAWING.enabled = document.getElementById("drawing").checked;};
