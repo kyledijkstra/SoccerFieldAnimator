@@ -152,7 +152,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.libero.y)
           .attr("x", attackingZones.libero.x)
           .style("fill", "black")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw left defender area
@@ -164,7 +164,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.defender.left.y)
           .attr("x", attackingZones.defender.left.x)
           .style("fill", "black")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw right defender area
@@ -176,7 +176,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.defender.right.y)
           .attr("x", attackingZones.defender.right.x)
           .style("fill", "black")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw holding mid area
@@ -188,7 +188,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.holdingMid.y)
           .attr("x", attackingZones.holdingMid.x)
           .style("fill", "red")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw left attacking mid area
@@ -200,7 +200,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.attackingMid.left.y)
           .attr("x", attackingZones.attackingMid.left.x)
           .style("fill", "red")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw right attacking mid area
@@ -212,7 +212,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.attackingMid.right.y)
           .attr("x", attackingZones.attackingMid.right.x)
           .style("fill", "red")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw playmaker area
@@ -224,7 +224,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.playmaker.y)
           .attr("x", attackingZones.playmaker.x)
           .style("fill", "gold")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw left fwd area
@@ -236,7 +236,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.wideFwd.left.y)
           .attr("x", attackingZones.wideFwd.left.x)
           .style("fill", "blue")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw right fwd area
@@ -248,7 +248,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.wideFwd.right.y)
           .attr("x", attackingZones.wideFwd.right.x)
           .style("fill", "blue")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw center fwd area
@@ -260,7 +260,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.centerFwd.y)
           .attr("x", attackingZones.centerFwd.x)
           .style("fill", "blue")
-          .style("opacity", 0.5)
+          .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
   } else {
@@ -533,5 +533,74 @@ function trainingLines(id, dir, num, enable) {
       }
     }
   }
+}
+
+function trainingGoals(id, dir, numGoals, enabled) {
+  var field = d3.select(id);
+  if (!enabled) {
+    var removeClass = "." + dir + "" + numGoals + "-goal";
+    field.selectAll(removeClass).remove();
+    return;
+  }
+
+  var goalSpacing = dir === "t" || dir === "b" ? ((FIELD_DIMENSIONS.length - (numGoals * (TRAINING_GOAL_WIDTH / SIZE_MULT))) / (numGoals+1)) * SIZE_MULT : ((FIELD_DIMENSIONS.width - (numGoals * (TRAINING_GOAL_WIDTH / SIZE_MULT))) / (numGoals+1)) * SIZE_MULT;
   
+  if (dir === "t") {
+    for (var i=1; i <= numGoals; i++) {
+      field.append("rect")
+        .attr("class", "t" + numGoals + "-goal training-field-marking")
+        .attr("id", "t" + numGoals + "-goal-" + i)
+        .attr("width", TRAINING_GOAL_WIDTH)
+        .attr("height", 2 * SIZE_MULT)
+        .attr("y", SIDELINE_MARGIN.top - (2 * SIZE_MULT))
+        .attr("x", SIDELINE_MARGIN.side + (goalSpacing * i) + (TRAINING_GOAL_WIDTH * (i-1)))
+        .style("fill", TRAINING_GOAL_COLOR)
+        .style("fill-opacity", 0.25)
+        .style("stroke", TRAINING_GOAL_COLOR)
+        .style("stroke-width", 2);
+    }
+  } else if (dir === "b") {
+    for (var i=1; i <= numGoals; i++) {
+      field.append("rect")
+        .attr("class", "b" + numGoals + "-goal training-field-marking")
+        .attr("id", "b" + numGoals + "-goal-" + i)
+        .attr("width", TRAINING_GOAL_WIDTH)
+        .attr("height", 2 * SIZE_MULT)
+        .attr("y", FIELD_WIDTH - SIDELINE_MARGIN.top)
+        .attr("x", SIDELINE_MARGIN.side + (goalSpacing * i) + (TRAINING_GOAL_WIDTH * (i-1)))
+        .style("fill", TRAINING_GOAL_COLOR)
+        .style("fill-opacity", 0.25)
+        .style("stroke", TRAINING_GOAL_COLOR)
+        .style("stroke-width", 2);
+    }
+  } else if (dir === "l") {
+    for (var i=1; i <= numGoals; i++) {
+      field.append("rect")
+        .attr("class", "l" + numGoals + "-goal training-field-marking")
+        .attr("id", "l" + numGoals + "-goal-" + i)
+        .attr("width", 2 * SIZE_MULT)
+        .attr("height", TRAINING_GOAL_WIDTH)
+        .attr("x", SIDELINE_MARGIN.side - (2 * SIZE_MULT))
+        .attr("y", SIDELINE_MARGIN.top + (goalSpacing * i) + (TRAINING_GOAL_WIDTH * (i-1)))
+        .style("fill", TRAINING_GOAL_COLOR)
+        .style("fill-opacity", 0.25)
+        .style("stroke", TRAINING_GOAL_COLOR)
+        .style("stroke-width", 2);
+    }
+  } else if (dir === "r") {
+    for (var i=1; i <= numGoals; i++) {
+      field.append("rect")
+        .attr("class", "r" + numGoals + "-goal training-field-marking")
+        .attr("id", "r" + numGoals + "-goal-" + i)
+        .attr("width", 2 * SIZE_MULT)
+        .attr("height", TRAINING_GOAL_WIDTH)
+        .attr("x", FIELD_LENGTH - SIDELINE_MARGIN.side)
+        .attr("y", SIDELINE_MARGIN.top + (goalSpacing * i) + (TRAINING_GOAL_WIDTH * (i-1)))
+        .style("fill", TRAINING_GOAL_COLOR)
+        .style("fill-opacity", 0.25)
+        .style("stroke", TRAINING_GOAL_COLOR)
+        .style("stroke-width", 2);
+    }
+  }
+  field.selectAll("#sidelines").moveToFront();
 }

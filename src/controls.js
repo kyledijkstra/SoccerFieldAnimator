@@ -76,4 +76,26 @@ function trainingControls() {
   document.getElementById("horiz-third").onchange = function() {trainingLines(FIELD_ID, "h", 3, document.getElementById("horiz-third").checked)};
   document.getElementById("horiz-quart").onchange = function() {trainingLines(FIELD_ID, "h", 4, document.getElementById("horiz-quart").checked)};
   document.getElementById("horiz-quint").onchange = function() {trainingLines(FIELD_ID, "h", 5, document.getElementById("horiz-quint").checked)};
+
+  document.getElementById("training-goal-color").onchange = function() {TRAINING_GOAL_COLOR = this.value;};
+
+  document.getElementById("top-goal-one").onchange   = function() {trainingGoals(FIELD_ID, "t", 1, document.getElementById("top-goal-one").checked)};
+  document.getElementById("top-goal-two").onchange   = function() {trainingGoals(FIELD_ID, "t", 2, document.getElementById("top-goal-two").checked)};
+  document.getElementById("top-goal-three").onchange = function() {trainingGoals(FIELD_ID, "t", 3, document.getElementById("top-goal-three").checked)};
+  document.getElementById("top-goal-four").onchange  = function() {trainingGoals(FIELD_ID, "t", 4, document.getElementById("top-goal-four").checked)};
+
+  document.getElementById("bot-goal-one").onchange   = function() {trainingGoals(FIELD_ID, "b", 1, document.getElementById("bot-goal-one").checked)};
+  document.getElementById("bot-goal-two").onchange   = function() {trainingGoals(FIELD_ID, "b", 2, document.getElementById("bot-goal-two").checked)};
+  document.getElementById("bot-goal-three").onchange = function() {trainingGoals(FIELD_ID, "b", 3, document.getElementById("bot-goal-three").checked)};
+  document.getElementById("bot-goal-four").onchange  = function() {trainingGoals(FIELD_ID, "b", 4, document.getElementById("bot-goal-four").checked)};
+
+  document.getElementById("left-goal-one").onchange   = function() {trainingGoals(FIELD_ID, "l", 1, document.getElementById("left-goal-one").checked)};
+  document.getElementById("left-goal-two").onchange   = function() {trainingGoals(FIELD_ID, "l", 2, document.getElementById("left-goal-two").checked)};
+  document.getElementById("left-goal-three").onchange = function() {trainingGoals(FIELD_ID, "l", 3, document.getElementById("left-goal-three").checked)};
+  document.getElementById("left-goal-four").onchange  = function() {trainingGoals(FIELD_ID, "l", 4, document.getElementById("left-goal-four").checked)};
+
+  document.getElementById("right-goal-one").onchange   = function() {trainingGoals(FIELD_ID, "r", 1, document.getElementById("right-goal-one").checked)};
+  document.getElementById("right-goal-two").onchange   = function() {trainingGoals(FIELD_ID, "r", 2, document.getElementById("right-goal-two").checked)};
+  document.getElementById("right-goal-three").onchange = function() {trainingGoals(FIELD_ID, "r", 3, document.getElementById("right-goal-three").checked)};
+  document.getElementById("right-goal-four").onchange  = function() {trainingGoals(FIELD_ID, "r", 4, document.getElementById("right-goal-four").checked)};
 }

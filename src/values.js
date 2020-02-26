@@ -14,6 +14,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     }
     FIELD_COLOR = "#3cb25b",
     FIELD_COLOR_ALT = "#33994e",
+    // FIELD_COLOR_ALT = "none",
     LINE_COLOR = "white",
     HOME = {
         name: "Home",
@@ -47,7 +48,9 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
     ATTACKING_ZONES_COLOR = "black",
     FONT = "Rubik",
     TRAINING_MODE = false,
-    TRAINING_LINE_COLOR = "white"
+    TRAINING_LINE_COLOR = "white",
+    TRAINING_GOAL_COLOR = "white",
+    TRAINING_GOAL_WIDTH = 15 * SIZE_MULT,
     DRAWING = {
         enabled: false,
         line: false,

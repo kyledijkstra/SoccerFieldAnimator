@@ -56,6 +56,70 @@
                 <feImage xlink:href = "images/ball.png"/>
             </filter>
         </svg>
+        <div class="child" id="training-options">
+            <table>
+                <tr>
+                    <td><h3>Training</h3></td>
+                    <td><input class="title-btn" type="checkbox" id="training-mode" name="training-mode" value="training-mode"></td>
+                </tr>
+                <tr>
+                    <td><h5 style="margin: 0">Field Lines</h5></td>
+                </tr>
+                <tr>
+                    <td>Color:</td>
+                    <td><input style="width: 7ch" id="training-line-color" value="white"></input></td>
+                </tr>
+                <tr>
+                    <td>Vertical:</td>
+                    <td><input type="checkbox" id="vert-half" name="vert-half" value="vert-half"><label for="vert-half">1/2</label></td>
+                    <td><input type="checkbox" id="vert-third" name="vert-third" value="vert-third"><label for="vert-third">1/3</label></td>
+                    <td><input type="checkbox" id="vert-quart" name="vert-quart" value="vert-quart"><label for="vert-quart">1/4</label></td>
+                    <td><input type="checkbox" id="vert-quint" name="vert-quint" value="vert-quint"><label for="vert-quint">1/5</label></td>
+                </tr>
+                <tr>
+                    <td>Horizontal:</td>
+                    <td><input type="checkbox" id="horiz-half" name="horiz-half" value="horiz-half"><label for="horiz-half">1/2</label></td>
+                    <td><input type="checkbox" id="horiz-third" name="horiz-third" value="horiz-third"><label for="horiz-third">1/3</label></td>
+                    <td><input type="checkbox" id="horiz-quart" name="horiz-quart" value="horiz-quart"><label for="horiz-quart">1/4</label></td>
+                    <td><input type="checkbox" id="horiz-quint" name="horiz-quint" value="horiz-quint"><label for="horiz-quint">1/5</label></td>
+                </tr>
+                <tr>
+                    <td><h5 style="margin: 0">Goals</h5></td>
+                </tr>
+                <tr>
+                    <td>Color:</td>
+                    <td><input style="width: 7ch" id="training-goal-color" value="white"></input></td>
+                </tr>
+                <tr>
+                    <td>Top:</td>
+                    <td><input type="checkbox" id="top-goal-one" name="top-goal-one" value="top-goal-one"><label for="top-goal-one">1</label></td>
+                    <td><input type="checkbox" id="top-goal-two" name="top-goal-two" value="top-goal-two"><label for="top-goal-two">2</label></td>
+                    <td><input type="checkbox" id="top-goal-three" name="top-goal-three" value="top-goal-three"><label for="top-goal-three">3</label></td>
+                    <td><input type="checkbox" id="top-goal-four" name="top-goal-four" value="top-goal-four"><label for="top-goal-four">4</label></td>
+                </tr>
+                <tr>
+                    <td>Bottom:</td>
+                    <td><input type="checkbox" id="bot-goal-one" name="bot-goal-one" value="bot-goal-one"><label for="bot-goal-one">1</label></td>
+                    <td><input type="checkbox" id="bot-goal-two" name="bot-goal-two" value="bot-goal-two"><label for="bot-goal-two">2</label></td>
+                    <td><input type="checkbox" id="bot-goal-three" name="bot-goal-three" value="bot-goal-three"><label for="bot-goal-three">3</label></td>
+                    <td><input type="checkbox" id="bot-goal-four" name="bot-goal-four" value="bot-goal-four"><label for="bot-goal-four">4</label></td>
+                </tr>
+                <tr>
+                    <td>Left:</td>
+                    <td><input type="checkbox" id="left-goal-one" name="left-goal-one" value="left-goal-one"><label for="left-goal-one">1</label></td>
+                    <td><input type="checkbox" id="left-goal-two" name="left-goal-two" value="left-goal-two"><label for="left-goal-two">2</label></td>
+                    <td><input type="checkbox" id="left-goal-three" name="left-goal-three" value="left-goal-three"><label for="left-goal-three">3</label></td>
+                    <td><input type="checkbox" id="left-goal-four" name="left-goal-four" value="left-goal-four"><label for="left-goal-four">4</label></td>
+                </tr>
+                <tr>
+                    <td>Right:</td>
+                    <td><input type="checkbox" id="right-goal-one" name="right-goal-one" value="right-goal-one"><label for="right-goal-one">1</label></td>
+                    <td><input type="checkbox" id="right-goal-two" name="right-goal-two" value="right-goal-two"><label for="right-goal-two">2</label></td>
+                    <td><input type="checkbox" id="right-goal-three" name="right-goal-three" value="right-goal-three"><label for="right-goal-three">3</label></td>
+                    <td><input type="checkbox" id="right-goal-four" name="right-goal-four" value="right-goal-four"><label for="right-goal-four">4</label></td>
+                </tr>
+            </table>
+        </div>
         <div class="child" id="color-choices">
             <h3>Color Choices</h3>
             <table>
@@ -153,35 +217,7 @@
                 </tr>
             </table>
         </div>
-        <div class="child" id="training-options">
-            <table>
-                <tr>
-                    <td><h3>Training</h3></td>
-                    <td><input class="title-btn" type="checkbox" id="training-mode" name="training-mode" value="training-mode"></td>
-                </tr>
-                <tr>
-                    <td><h5 style="margin: 0">Field Lines</h5></td>
-                </tr>
-                <tr>
-                    <td>Color:</td>
-                    <td><input style="width: 7ch" id="training-line-color" value="white"></input></td>
-                </tr>
-                <tr>
-                    <td>Vertical:</td>
-                    <td><input type="checkbox" id="vert-half" name="vert-half" value="vert-half"><label for="vert-half">1/2</label></td>
-                    <td><input type="checkbox" id="vert-third" name="vert-third" value="vert-third"><label for="vert-third">1/3</label></td>
-                    <td><input type="checkbox" id="vert-quart" name="vert-quart" value="vert-quart"><label for="vert-quart">1/4</label></td>
-                    <td><input type="checkbox" id="vert-quint" name="vert-quint" value="vert-quint"><label for="vert-quint">1/5</label></td>
-                </tr>
-                <tr>
-                    <td>Horizontal:</td>
-                    <td><input type="checkbox" id="horiz-half" name="horiz-half" value="horiz-half"><label for="horiz-half">1/2</label></td>
-                    <td><input type="checkbox" id="horiz-third" name="horiz-third" value="horiz-third"><label for="horiz-third">1/3</label></td>
-                    <td><input type="checkbox" id="horiz-quart" name="horiz-quart" value="horiz-quart"><label for="horiz-quart">1/4</label></td>
-                    <td><input type="checkbox" id="horiz-quint" name="horiz-quint" value="horiz-quint"><label for="horiz-quint">1/5</label></td>
-                </tr>
-            </table>
-        </div>
+        
     </div>
     
     
