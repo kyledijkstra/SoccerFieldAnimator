@@ -213,10 +213,12 @@ function goToAnimation(slideNumber) {
   CURRENT_ANIMATION = slideNumber;
   // Draw ball
   var ballLocations = ANIMATION_HISTORY.ball.locations;
+  BALL_POSITION.x = ballLocations[slideNumber].x;
+  BALL_POSITION.y = ballLocations[slideNumber].y;
   var ball = d3.select("#ball");
   ball // set ball to initial position
-    .attr("cx", ballLocations[slideNumber].x)
-    .attr("cy", ballLocations[slideNumber].y);
+    .attr("cx", BALL_POSITION.x)
+    .attr("cy", BALL_POSITION.y);
   //Draw home players
   for (var p=0; p < HOME.players.length; p++) {
     var id = HOME.players[p].id;

@@ -35,22 +35,30 @@ function addPlayer(team, individual) {
         .on("start", dragstarted)
         .on("drag", dragged)
         .on("end", dragended));
-    var circle = elemEnter.append("circle")
+    elemEnter.append("circle")
       .attr("r", PLAYER_RADIUS)
+      .style("fill", HOME.colorSecondary)
+      .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
+      .on("mouseout", function (d) {});
+    elemEnter.append("circle")
+      .attr("r", PLAYER_RADIUS - 2)
       .style("fill", HOME.color)
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
     var arc = d3.arc();
-    var halfCircle = elemEnter.append('path')
-      .style("fill", HOME.colorSecondary)
-      .attr('d', arc({
-          innerRadius: 0,
-          outerRadius: PLAYER_RADIUS,
-          startAngle: 0,
-          endAngle: Math.PI
-      }))
-      .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
-      .on("mouseout", function (d) {});
+    if (false) {// if (HOME.colorSecondary !== HOME.color) {
+      elemEnter.append('path')
+        .style("fill", HOME.colorSecondary)
+        .attr('d', arc({
+            innerRadius: 0,
+            outerRadius: PLAYER_RADIUS,
+            startAngle: 0,
+            endAngle: Math.PI
+        }))
+        .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
+        .on("mouseout", function (d) {});
+    }
+    
     elemEnter.append("text")
       .attr("class", "home-player-number")
       .attr("id", function (d) { return "home-player-number-" + d.id; })
@@ -93,22 +101,29 @@ function addPlayer(team, individual) {
         .on("start", dragstarted)
         .on("drag", dragged)
         .on("end", dragended));
-    var circle = elemEnter.append("circle")
+    elemEnter.append("circle")
       .attr("r", PLAYER_RADIUS)
+      .style("fill", AWAY.colorSecondary)
+      .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
+      .on("mouseout", function (d) {});
+    elemEnter.append("circle")
+      .attr("r", PLAYER_RADIUS - 2)
       .style("fill", AWAY.color)
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
     var arc = d3.arc();
-    var halfCircle = elemEnter.append('path')
-      .style("fill", AWAY.colorSecondary)
-      .attr('d', arc({
-          innerRadius: 0,
-          outerRadius: PLAYER_RADIUS,
-          startAngle: 0,
-          endAngle: Math.PI
-      }))
-      .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
-      .on("mouseout", function (d) {});
+    if (false) {//if (AWAY.colorSecondary !== AWAY.color) {
+      elemEnter.append('path')
+        .style("fill", AWAY.colorSecondary)
+        .attr('d', arc({
+            innerRadius: 0,
+            outerRadius: PLAYER_RADIUS,
+            startAngle: 0,
+            endAngle: Math.PI
+        }))
+        .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
+        .on("mouseout", function (d) {});
+    }
     elemEnter.append("text")
       .attr("class", "away-player-number")
       .attr("id", function (d) { return "away-player-number-" + d.id; })

@@ -151,7 +151,7 @@ function drawAttackingZones(id, move) {
           .attr("height", attackingZones.libero.height)
           .attr("y", attackingZones.libero.y)
           .attr("x", attackingZones.libero.x)
-          .style("fill", "black")
+          .style("fill", "purple")
           .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
@@ -163,7 +163,7 @@ function drawAttackingZones(id, move) {
           .attr("height", attackingZones.defender.left.height)
           .attr("y", attackingZones.defender.left.y)
           .attr("x", attackingZones.defender.left.x)
-          .style("fill", "black")
+          .style("fill", "purple")
           .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
@@ -175,7 +175,7 @@ function drawAttackingZones(id, move) {
           .attr("height", attackingZones.defender.right.height)
           .attr("y", attackingZones.defender.right.y)
           .attr("x", attackingZones.defender.right.x)
-          .style("fill", "black")
+          .style("fill", "purple")
           .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
@@ -223,7 +223,7 @@ function drawAttackingZones(id, move) {
           .attr("height", attackingZones.playmaker.height)
           .attr("y", attackingZones.playmaker.y)
           .attr("x", attackingZones.playmaker.x)
-          .style("fill", "gold")
+          .style("fill", "red")
           .style("fill-opacity", 0.5)
           .style("stroke", "white")
           .style("stroke-width", 3);
