@@ -1,5 +1,7 @@
 function addAnimation() {
+  CURRENT_ANIMATION = ANIMATION_NUMBER;
   ANIMATION_NUMBER++;
+  console.log('[Adding Animation] ' + ANIMATION_NUMBER);
   if (Object.keys(ANIMATION_HISTORY).length > 0) {
     ANIMATION_HISTORY.ball.locations.push({
       x: BALL_POSITION.x,
@@ -62,14 +64,17 @@ function addAnimation() {
 }
 
 function stepAnimations(dir) {
-  if ((dir === 'b' && CURRENT_ANIMATION === 0) || dir === 'f' && CURRENT_ANIMATION >= ANIMATION_HISTORY.ball.locations.length-1) return;
+  if (CURRENT_ANIMATION > ANIMATION_HISTORY.ball.locations.length-1) CURRENT_ANIMATION = ANIMATION_HISTORY.ball.locations.length-1;
+  if ((dir === 'b' && CURRENT_ANIMATION === 0) || dir === 'f' && CURRENT_ANIMATION === ANIMATION_HISTORY.ball.locations.length-1) return;
   var duration = 2000,
       delay = 0;
   var secondAnimation;
   if (dir === 'f') {
     secondAnimation = CURRENT_ANIMATION+1;
+    console.log('[Step forward animation] ' + CURRENT_ANIMATION + ' -> ' + secondAnimation);
   } else if (dir === 'b' && CURRENT_ANIMATION !== 0) {
     secondAnimation = CURRENT_ANIMATION-1;
+    console.log('[Step backward animation] ' + CURRENT_ANIMATION + ' -> ' + secondAnimation);
   }
   // Draw ball 
   var ballLocations = ANIMATION_HISTORY.ball.locations;
@@ -166,12 +171,13 @@ function playAnimations() {
       }
     }
   }
-  CURRENT_ANIMATION = 0;
+  // CURRENT_ANIMATION = 0;
 }
 
 function writeAnimationList() {
   d3.selectAll(".animation-history-list").remove();
   for (var i=0; i < ANIMATION_HISTORY.ball.locations.length; i++) {
+    console.log(ANIMATION_HISTORY);
     addAnimationToList(i);
   }
 }
@@ -195,6 +201,7 @@ function addAnimationToList(id) {
 }
 
 function removeAnimation(id) {
+  console.log('[Removing Animation] ' + id);
   d3.selectAll("#animation-history-" + id).remove();
   d3.selectAll("#animation-history-list-delete-button-" + id).remove();
   ANIMATION_HISTORY.ball.locations.splice(id, 1);

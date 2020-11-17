@@ -33,9 +33,18 @@ function teamControls() {
 
 //attach event handlers to animation buttons
 function animationControls() {
-  document.getElementById("play-animations").onclick = function() {playAnimations(CURRENT_ANIMATION, true)};
+  document.getElementById("play-animations").onclick = function() {playAnimations()};
   document.getElementById("step-fwd-animations").onclick = function() {stepAnimations("f")};
   document.getElementById("step-bck-animations").onclick = function() {stepAnimations("b")};
+  document.addEventListener("keydown", function(event) {
+    if (event.code === "KeyW") {addAnimation()}
+    if (Object.keys(ANIMATION_HISTORY).length > 0) {
+      if (event.code === "KeyS") {playAnimations()}
+      if (event.code === "KeyD") {stepAnimations("f")}
+      if (event.code === "KeyA") {stepAnimations("b")}
+      if (event.code === "KeyX") {removeAnimation(CURRENT_ANIMATION)}
+    }
+  })
   document.getElementById("add-animation").onclick = function() {addAnimation()};
 }
 
