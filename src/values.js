@@ -1,13 +1,10 @@
 //GLOBAL VARIABLES
 var FIELD_DIMENSIONS = {length: 120, width: 80},
-    SIZE_MULT = 8.5,
     MARGIN_TOP = 0,
     FIELD_ID = "#tracker",
-    // SIDELINE_MARGIN = 20,
-    // FIELD_LENGTH = (FIELD_DIMENSIONS.length * SIZE_MULT) + (2 * SIDELINE_MARGIN),
-    // FIELD_WIDTH = (FIELD_DIMENSIONS.width * SIZE_MULT) + (2 * SIDELINE_MARGIN),
-    FIELD_LENGTH = 1280,
-    FIELD_WIDTH = 720,
+    FIELD_WIDTH = window.innerHeight,
+    FIELD_LENGTH = window.innerWidth,
+    SIZE_MULT = FIELD_LENGTH > 1240 ? 10 : 8.5,
     SIDELINE_MARGIN = {
         top: (FIELD_WIDTH - (FIELD_DIMENSIONS.width * SIZE_MULT))/2,
         side: (FIELD_LENGTH - (FIELD_DIMENSIONS.length * SIZE_MULT))/2

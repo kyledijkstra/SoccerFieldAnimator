@@ -5,7 +5,7 @@ function drawField(id) {
         .on("start", drawingStarted)
         .on("end", recordDrawing);
     
-
+    
     //draw field            
     var field = d3.select(id)
         .attr("width", FIELD_LENGTH + MARGIN_TOP)
@@ -27,6 +27,7 @@ function drawAlternatingField(id) {
     for (var i=0; i<FIELD_DIMENSIONS.length/6; i=i+2) {
         //draw alternating field colors
         field.append("rect")
+            .attr("class", "field-marking")
             .attr("id", "alt-field-color-" + i)
             .attr("width", 6 * SIZE_MULT)
             .attr("height", FIELD_WIDTH - (2 * SIDELINE_MARGIN.top))
@@ -199,32 +200,3 @@ function dragball(d) {
     };
   }
 
-function writeTeamNames(id) {
-    var field = d3.select(id);
-    var teams = field.append("g")
-        .attr("transform", "translate(10,25)");
-    field.select("#home-text").remove();
-    field.select("#away-text").remove();
-    HOME.name = document.getElementById("home-team-name").value;
-    AWAY.name = document.getElementById("away-team-name").value;
-    d3.select("#hf-name").text(HOME.name);
-    d3.select("#af-name").text(AWAY.name);
-    field.append("text")
-        .attr("id", "home-text")
-        .attr("x", FIELD_LENGTH/4)
-        .attr("y", MARGIN_TOP/2)     
-        .attr("dy", ".35em")
-        .style("text-anchor", "middle")
-        .style("fill", HOME.color)
-        .style("font", "1.75em sans-serif")
-        .text(HOME.name);
-    field.append("text")   
-        .attr("id", "away-text")       
-        .attr("x", (FIELD_LENGTH/4)*3)
-        .attr("y", MARGIN_TOP/2)
-        .attr("dy", ".35em")
-        .style("text-anchor", "middle")
-        .style("fill", AWAY.color)
-        .style("font", "1.75em sans-serif")
-        .text(AWAY.name);
-}
