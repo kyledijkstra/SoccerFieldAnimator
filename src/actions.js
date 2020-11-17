@@ -46,7 +46,8 @@ function addPlayer(team, individual) {
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
     var arc = d3.arc();
-    if (false) {// if (HOME.colorSecondary !== HOME.color) {
+    if (false) {
+    // if (HOME.colorSecondary !== HOME.color) { //half/half color dots
       elemEnter.append('path')
         .style("fill", HOME.colorSecondary)
         .attr('d', arc({
@@ -112,7 +113,8 @@ function addPlayer(team, individual) {
       .on("mouseover", function (d) { d3.select(this).style("cursor", "move"); })
       .on("mouseout", function (d) {});
     var arc = d3.arc();
-    if (false) {//if (AWAY.colorSecondary !== AWAY.color) {
+    if (false) {
+    //if (AWAY.colorSecondary !== AWAY.color) { //half/half color dots
       elemEnter.append('path')
         .style("fill", AWAY.colorSecondary)
         .attr('d', arc({
