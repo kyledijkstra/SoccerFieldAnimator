@@ -1,6 +1,8 @@
 var start = {},
     end = {};
 
+var playerLine = {from:{}, to:{}};
+
 function drawingStarted() {
   //only draw something if drawing is enabled
   if (!DRAWING.enabled) return;
@@ -89,6 +91,31 @@ function draw(s, e) {
   DRAWING.numberDrawings++;
 }
 
+function drawPlayerLine(player) {
+  if (DRAWING.playerLine) {
+    playerLine.to = player;
+    var origLineBool = DRAWING.line;
+    DRAWING.line = true;
+    var start = {
+      x: playerLine.from.x,
+      y: playerLine.from.y,
+    }
+    var end = {
+      x: playerLine.to.x,
+      y: playerLine.to.y,
+    }
+    draw(start, end);
+    DRAWING.line = origLineBool;
+    var field = d3.select(FIELD_ID);
+    field.selectAll("#ball").moveToFront();
+    field.selectAll(".home-player").moveToFront();
+    field.selectAll(".away-player").moveToFront();
+    } else {
+    playerLine.from = player;
+  }
+  DRAWING.playerLine = !DRAWING.playerLine;
+}
+
 function drawVerticalZones(id) {
   if (!VERTICAL_ZONES) {
       var field = d3.select(id);
@@ -137,7 +164,7 @@ function drawVerticalZones(id) {
   }
   VERTICAL_ZONES = !VERTICAL_ZONES;
 }
-
+var attackZoneFill = 0.33;
 function drawAttackingZones(id, move) {
   var field = d3.select(id);
   if (move) {
@@ -152,7 +179,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.libero.y)
           .attr("x", attackingZones.libero.x)
           .style("fill", "purple")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw left defender area
@@ -164,7 +191,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.defender.left.y)
           .attr("x", attackingZones.defender.left.x)
           .style("fill", "purple")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw right defender area
@@ -176,7 +203,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.defender.right.y)
           .attr("x", attackingZones.defender.right.x)
           .style("fill", "purple")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw holding mid area
@@ -188,7 +215,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.holdingMid.y)
           .attr("x", attackingZones.holdingMid.x)
           .style("fill", "red")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw left attacking mid area
@@ -200,7 +227,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.attackingMid.left.y)
           .attr("x", attackingZones.attackingMid.left.x)
           .style("fill", "red")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw right attacking mid area
@@ -212,7 +239,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.attackingMid.right.y)
           .attr("x", attackingZones.attackingMid.right.x)
           .style("fill", "red")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw playmaker area
@@ -224,7 +251,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.playmaker.y)
           .attr("x", attackingZones.playmaker.x)
           .style("fill", "red")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw left fwd area
@@ -236,7 +263,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.wideFwd.left.y)
           .attr("x", attackingZones.wideFwd.left.x)
           .style("fill", "blue")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw right fwd area
@@ -248,7 +275,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.wideFwd.right.y)
           .attr("x", attackingZones.wideFwd.right.x)
           .style("fill", "blue")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
       //draw center fwd area
@@ -260,7 +287,7 @@ function drawAttackingZones(id, move) {
           .attr("y", attackingZones.centerFwd.y)
           .attr("x", attackingZones.centerFwd.x)
           .style("fill", "blue")
-          .style("fill-opacity", 0.5)
+          .style("fill-opacity", attackZoneFill)
           .style("stroke", "white")
           .style("stroke-width", 3);
   } else {

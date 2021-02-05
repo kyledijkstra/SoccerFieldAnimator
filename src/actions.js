@@ -21,6 +21,7 @@ function addPlayer(team, individual) {
         y: SIDELINE_MARGIN.top + (12 * SIZE_MULT),
         number: smallestAvailableNumber(HOME.players),
         name: '',
+        team: 'home',
         id: HOME.playerIdTracker++
       });
     }
@@ -31,6 +32,9 @@ function addPlayer(team, individual) {
       .attr("class", "home-player")
       .attr("id", function(d) { return "home-player-" + d.id })
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")" })
+      .on("dblclick", function(d) {
+        drawPlayerLine(d);
+      })
       .call(d3.drag()
         .on("start", dragstarted)
         .on("drag", dragged)
@@ -88,6 +92,7 @@ function addPlayer(team, individual) {
         y: FIELD_LENGTH - SIDELINE_MARGIN.top - (12 * SIZE_MULT),
         number: smallestAvailableNumber(AWAY.players),
         name: '',
+        team: 'away',
         id: AWAY.playerIdTracker++
       });
     }

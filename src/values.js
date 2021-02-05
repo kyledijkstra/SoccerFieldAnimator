@@ -60,6 +60,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         shapeBorder: false,
         shapeDash: false,
         circle: false,
-        square: false
+        square: false,
+        playerLine: false
     };
 var PLAYER_RADIUS = PLAYER_CIRCLE_SIZE * SIZE_MULT;
