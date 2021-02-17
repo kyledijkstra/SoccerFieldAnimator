@@ -13,6 +13,6 @@ app.get('/:name', function (req, res) {
     res.render(__dirname+'/src/'+name);
   })
   
-  app.listen(8888, function () {
-    console.log('listening on port 8888!')
-  })
+app.listen(8888, function () {
+  console.log('listening on port 8888!')
+})

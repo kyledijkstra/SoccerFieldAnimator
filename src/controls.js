@@ -46,6 +46,8 @@ function animationControls() {
     }
   })
   document.getElementById("add-animation").onclick = function() {addAnimation()};
+  document.getElementById("export-animations").onclick = function() {exportAnimations(ANIMATION_HISTORY, 'animations')};
+  document.getElementById("load-animations").onclick = function() {loadAnimations()};
 }
 
 //attach event handlers to drawing buttons
