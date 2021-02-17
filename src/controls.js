@@ -34,15 +34,15 @@ function teamControls() {
 //attach event handlers to animation buttons
 function animationControls() {
   document.getElementById("play-animations").onclick = function() {playAnimations()};
-  document.getElementById("step-fwd-animations").onclick = function() {stepAnimations("f")};
-  document.getElementById("step-bck-animations").onclick = function() {stepAnimations("b")};
+  document.getElementById("step-fwd-animations").onclick = function() {stepAnimaton("f")};
+  document.getElementById("step-bck-animations").onclick = function() {stepAnimaton("b")};
   document.addEventListener("keydown", function(event) {
     if (event.key === "W") {addAnimation()}
-    if (Object.keys(ANIMATION_HISTORY).length > 0) {
+    if (ANIMATION_HISTORY.length > 0) {
       if (event.key === "S") {playAnimations()}
-      if (event.key === "D") {stepAnimations("f")}
-      if (event.key === "A") {stepAnimations("b")}
-      if (event.key === "X") {removeAnimation(CURRENT_ANIMATION)}
+      if (event.key === "D") {stepAnimaton("f")}
+      if (event.key === "A") {stepAnimaton("b")}
+      if (event.key === "X") {removeAnimation(CURRENT_ANIMATION_INDEX)}
     }
   })
   document.getElementById("add-animation").onclick = function() {addAnimation()};

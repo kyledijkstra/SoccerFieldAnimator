@@ -10,8 +10,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         side: (FIELD_LENGTH - (FIELD_DIMENSIONS.length * SIZE_MULT))/2
     }
     FIELD_COLOR = "#3cb25b",
-    FIELD_COLOR_ALT = "#33994e",
-    // FIELD_COLOR_ALT = "none",
+    FIELD_COLOR_ALT = "#33994e", // "none"
     LINE_COLOR = "white",
     HOME = {
         name: "Home",
@@ -37,9 +36,8 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         x: FIELD_LENGTH / 2,
         y: FIELD_WIDTH / 2
     },
-    ANIMATION_HISTORY = {},
-    ANIMATION_NUMBER = 0,
-    CURRENT_ANIMATION = 0,
+    ANIMATION_HISTORY = [],
+    CURRENT_ANIMATION_INDEX = 0,
     VERTICAL_ZONES = false,
     ATTACKING_ZONES = false,
     ATTACKING_ZONES_COLOR = "black",

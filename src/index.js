@@ -1,6 +1,6 @@
 /**
  * TODO
- * 
+ * CMD+D = Drawing enable/disable
  */
 
 $(document).ready(function() {
