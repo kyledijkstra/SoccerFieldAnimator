@@ -5,10 +5,12 @@ function addAnimation() {
     players: [],
     drawings: []
   };
+  //Add ball to slide
   slide.ball = {
     x: BALL_POSITION.x,
     y: BALL_POSITION.y
   };
+  //Add players to slide
   for (p in HOME.players) {
     let player = HOME.players[p];
     slide.players.push({
@@ -25,8 +27,61 @@ function addAnimation() {
       y: player.y
     });
   }
+  //Add drawings to slide
+  d3.selectAll(".line").each(function(d, i){
+    let line = d3.select(this);
+    let lineObj = {
+      type: "line",
+      start: {
+        x: line.attr("x1"),
+        y: line.attr("y1"),
+      },
+      end: {
+        x: line.attr("x2"),
+        y: line.attr("y2"),
+      },
+      stroke: line.style("stroke"),
+      strokeWidth: line.style("stroke-width"),
+      dash: line.style("stroke-dasharray"),
+      arrow: line.attr("marker-end")
+    }
+    slide.drawings.push(lineObj);
+  });
+  d3.selectAll(".circle").each(function(d, i){
+    let circle = d3.select(this);
+    let circleObj = {
+      type: "circle",
+      dimensions: {
+        x: circle.attr("cx"),
+        y: circle.attr("cy"),
+        r: circle.attr("r"),
+      },
+      stroke: circle.style("stroke"),
+      strokeWidth: circle.style("stroke-width"),
+      dash: circle.style("stroke-dasharray"),
+      fill: circle.style("fill"),
+    }
+    slide.drawings.push(circleObj);
+  });
+  d3.selectAll(".square").each(function(d, i){
+    let square = d3.select(this);
+    let squareObj = {
+      type: "square",
+      dimensions: {
+        x: square.attr("x"),
+        y: square.attr("y"),
+        width: square.attr("width"),
+        height: square.attr("height"),
+      },
+      stroke: square.style("stroke"),
+      strokeWidth: square.style("stroke-width"),
+      dash: square.style("stroke-dasharray"),
+      fill: square.style("fill"),
+    }
+    slide.drawings.push(squareObj);
+  });
+  // console.log(slide);
   ANIMATION_HISTORY.push(slide);
-  // TODO add drawings to tracking ANIMATION_HISTORY
   writeAnimationList();
 }
 
@@ -59,7 +114,12 @@ function stepAnimaton(dir) {
       .delay(delay)
       .attr("transform", function(d) { d.x = player.x; d.y = player.y; return "translate(" + d.x + "," + d.y + ")" });
   }
-
+  //Remove old drawings and draw next drawings
+  removeDrawings(FIELD_ID);
+  for (d in nextAnimation.drawings) {
+    let drawing = nextAnimation.drawings[d];
+    drawFromObject(drawing);
+  }
   if (dir === 'f') {
     CURRENT_ANIMATION_INDEX++;
   } else if (dir === 'b') {
@@ -107,6 +167,12 @@ function goToAnimation(slideNumber) {
     d3.selectAll("#" + player.id)
       .attr("transform", function(d) { d.x = player.x; d.y = player.y; return "translate(" + d.x + "," + d.y + ")" });
   }
+  //Remove old drawings and draw next drawings
+  removeDrawings(FIELD_ID);
+  for (d in currAnimation.drawings) {
+    let drawing = currAnimation.drawings[d];
+    drawFromObject(drawing);
+  }
 }
 
 function playAnimations() {
@@ -129,6 +195,14 @@ function playAnimations() {
         .delay(delay * a)
         .attr("transform", function(d) { return "translate(" + player.x + "," + player.y + ")" });
     }
+    setTimeout(function(){
+      removeDrawings(FIELD_ID);
+      for (d in animation.drawings) {
+        let drawing = animation.drawings[d];
+        drawFromObject(drawing);
+      }
+    }, delay * a);
+    
   }
   CURRENT_ANIMATION_INDEX = ANIMATION_HISTORY.length-1;
 }
@@ -156,5 +230,6 @@ function loadAnimations() {
     .then(data => {
       ANIMATION_HISTORY = data;
       writeAnimationList();
+      goToAnimation(0);
     });
 }

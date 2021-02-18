@@ -35,7 +35,7 @@ function draw(s, e) {
       .attr("x2", e.x)
       .attr("y2", e.y)
       .style("stroke", DRAWING.lineColor)
-      .style("stroke-width", 2)
+      .style("stroke-width", DRAWING.lineWidth)
       .on("dblclick", function(d) {
         field.selectAll("#" + newId).remove();
       });
@@ -56,8 +56,8 @@ function draw(s, e) {
         .style("fill", DRAWING.lineColor);
       line.attr("marker-end","url(#triangle-" + DRAWING.numberDrawings + ")");
     }
-  } else if ((DRAWING.circle || DRAWING.square) && (Math.abs(s.x - e.x) > 5 && Math.abs(s.y - e.y) > 5)) {
-    if (DRAWING.circle) { //circle
+  } else if (DRAWING.circle) {
+    if (e) { //Drawing coords (start and end)
       var centerX = (s.x + e.x) / 2,
           centerY = (s.y + e.y) / 2;
       var circle = field.append("circle")
@@ -65,14 +65,29 @@ function draw(s, e) {
         .attr("id", "drawing-" + DRAWING.numberDrawings)
         .style("fill", DRAWING.shapeFill ? DRAWING.shapeColor : "none")
         .style("stroke", DRAWING.shapeBorder ? DRAWING.shapeColor : "none")
-        .style("stroke-width", DRAWING.shapeBorder ? 2 : 0)  
+        .style("stroke-width", DRAWING.shapeBorder ? DRAWING.lineWidth : 0)  
         .attr("cx", centerX)
         .attr("cy", centerY)
         .attr("r", s.x > e.x ? (s.x - e.x) / 2 : (e.x - s.x) / 2);
       if (DRAWING.shapeDash) {
         circle.style("stroke-dasharray", ("4, 5"));
       }
-    } else { //square
+    } else { //Object coords (only start = dimensions)
+      var circle = field.append("circle")
+        .attr("class", "drawn circle")
+        .attr("id", "drawing-" + DRAWING.numberDrawings)
+        .style("fill", DRAWING.shapeFill ? DRAWING.shapeColor : "none")
+        .style("stroke", DRAWING.shapeBorder ? DRAWING.shapeColor : "none")
+        .style("stroke-width", DRAWING.shapeBorder ? DRAWING.lineWidth : 0)  
+        .attr("cx", parseInt(s.x))
+        .attr("cy", parseInt(s.y))
+        .attr("r", parseInt(s.r));
+      if (DRAWING.shapeDash) {
+        circle.style("stroke-dasharray", ("4, 5"));
+      }
+    }
+  } else if (DRAWING.square) { //square
+    if (e) { //Drawing coords (start and end)
       var square = field.append("rect")
         .attr("class", "drawn square")
         .attr("id", "drawing-" + DRAWING.numberDrawings)
@@ -82,13 +97,76 @@ function draw(s, e) {
         .attr("y", s.y < e.y ? s.y : e.y)
         .style("fill", DRAWING.shapeFill ? DRAWING.shapeColor : "none")
         .style("stroke", DRAWING.shapeBorder ? DRAWING.shapeColor : "none")
-        .style("stroke-width", DRAWING.shapeBorder ? 2 : 0);
-        if (DRAWING.shapeDash) {
-          square.style("stroke-dasharray", ("4, 5"));
-        }
+        .style("stroke-width", DRAWING.shapeBorder ? DRAWING.lineWidth : 0);
+      if (DRAWING.shapeDash) {
+        square.style("stroke-dasharray", ("4, 5"));
+      }
+    } else { //Object coords (only start = dimensions)
+      var square = field.append("rect")
+        .attr("class", "drawn square")
+        .attr("id", "drawing-" + DRAWING.numberDrawings)
+        .attr("width", s.width)
+        .attr("height", s.height)
+        .attr("x", s.x )
+        .attr("y", s.y)
+        .style("fill", DRAWING.shapeFill ? DRAWING.shapeColor : "none")
+        .style("stroke", DRAWING.shapeBorder ? DRAWING.shapeColor : "none")
+        .style("stroke-width", DRAWING.shapeBorder ? DRAWING.lineWidth : 0);
+      if (DRAWING.shapeDash) {
+        square.style("stroke-dasharray", ("4, 5"));
+      }
     }
   }
+  var field = d3.select(FIELD_ID);
+  field.selectAll("#ball").moveToFront();
+  field.selectAll(".home-player").moveToFront();
+  field.selectAll(".away-player").moveToFront();
   DRAWING.numberDrawings++;
+}
+
+function drawFromObject(drawing) {
+  var tmpGlobalDrawing = DRAWING;
+  DRAWING = {
+    enabled: false,
+    line: false,
+    dash: false,
+    arrow: false,
+    numberDrawings: 0,
+    lineWidth: 2,
+    lineColor: "black",
+    shapeColor: "black",
+    shapeFill: false,
+    shapeBorder: false,
+    shapeDash: false,
+    circle: false,
+    square: false,
+    playerLine: false
+  };
+  if (drawing.type === "line") {
+    DRAWING.line = true;
+    DRAWING.lineColor = drawing.stroke;
+    DRAWING.lineWidth = drawing.strokeWidth;
+    DRAWING.dash = drawing.dash !== "none";
+    DRAWING.arrow = drawing.arrow !== null;
+    draw(drawing.start, drawing.end);
+  } else if (drawing.type === "circle") {
+    DRAWING.circle = true;
+    DRAWING.lineWidth = drawing.strokeWidth;
+    DRAWING.shapeColor = drawing.stroke === "none" ? drawing.fill : drawing.stroke;
+    DRAWING.shapeBorder = drawing.stroke !== "none";
+    DRAWING.shapeDash = drawing.dash !== "none";
+    DRAWING.shapeFill = drawing.fill !== "none";
+    draw(drawing.dimensions, false);
+  } else if (drawing.type === "square") {
+    DRAWING.square = true;
+    DRAWING.lineWidth = drawing.strokeWidth;
+    DRAWING.shapeColor = drawing.stroke === "none" ? drawing.fill : drawing.stroke;
+    DRAWING.shapeBorder = drawing.stroke !== "none";
+    DRAWING.shapeDash = drawing.dash !== "none";
+    DRAWING.shapeFill = drawing.fill !== "none";
+    draw(drawing.dimensions, false);
+  }
+  DRAWING = tmpGlobalDrawing;
 }
 
 function drawPlayerLine(player) {
@@ -106,10 +184,6 @@ function drawPlayerLine(player) {
     }
     draw(start, end);
     DRAWING.line = origLineBool;
-    var field = d3.select(FIELD_ID);
-    field.selectAll("#ball").moveToFront();
-    field.selectAll(".home-player").moveToFront();
-    field.selectAll(".away-player").moveToFront();
     } else {
     playerLine.from = player;
   }
@@ -631,3 +705,4 @@ function trainingGoals(id, dir, numGoals, enabled) {
   }
   field.selectAll("#sidelines").moveToFront();
 }
+

@@ -1,6 +1,6 @@
 /**
  * TODO
- * Export/Import animation json object
+ * Allow direct animation import
  * CMD+D = Drawing enable/disable
  */
 
