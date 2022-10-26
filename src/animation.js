@@ -3,7 +3,8 @@ function addAnimation() {
   let slide = {
     ball: {},
     players: [],
-    drawings: []
+    drawings: [],
+    name: "Slide #" + parseInt(CURRENT_ANIMATION_INDEX+1)
   };
   //Add ball to slide
   slide.ball = {
@@ -135,16 +136,24 @@ function stepAnimaton(dir) {
 function writeAnimationList() {
   d3.selectAll(".animation-history-list").remove();
   for (i in ANIMATION_HISTORY) {
-    addAnimationToList(i);
+    var slideNum = parseInt(i)+1;
+    var slideName = ANIMATION_HISTORY[i].name ? ANIMATION_HISTORY[i].name : "Slide #" + slideNum;
+    addAnimationToList(i, slideName);
   }
 }
 
-function addAnimationToList(id) {
+function addAnimationToList(id, name) {
   let list = d3.select("#animation-history");
   let item = list.append("li",":first-child")
     .attr("id", "animation-history-" + id)
     .attr("class", "animation-history-list");
-  item.html("Slide #" + (parseInt(id)+1));
+  item.append("input")
+        .attr("id", "animation-history-list-slide-" + id)
+        .attr("class", "animation-history-list")
+        .attr("type", "text")
+        .attr("value", name)
+        .style("width", "70px")
+        .on("input", function() { updateSlideName(this.value, id); });
   item.append("button")
     .attr("id", "animation-history-list-goto-button-" + id)
     .attr("class", "animation-history-list")
@@ -155,6 +164,10 @@ function addAnimationToList(id) {
     .attr("class", "animation-history-list")
     .text("X")
     .on("click", function(d) { removeAnimation(id); });
+}
+
+function updateSlideName(val, slideNumber) {
+  ANIMATION_HISTORY[slideNumber].name = val;
 }
 
 function goToAnimation(slideNumber) {
@@ -272,6 +285,8 @@ function getAbsoluteAnimation(animationObj) {
   for (a in animations) {
     var animObj = {};
     var animation = animations[a];
+    //name
+    animObj.name = animation.name;
     //ball
     animObj.ball = convertPoint(animation.ball, animationObj.size, currSize);
     //players
