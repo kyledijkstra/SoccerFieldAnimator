@@ -59,6 +59,96 @@
                 <feImage xlink:href = "images/ball.png"/>
             </filter>
         </svg>
+        <div class="child" id="animation">
+            <table>
+                <tr>
+                    <td><h3>Animation</h3></td>
+                    <td><button class="title-btn" id="add-animation" type="button">+ Animation (W)</button></td>
+                    <td><button class="title-btn" id="step-bck-animations" type="button">Step < (A)</button></td>
+                    <td><button class="title-btn" id="play-animations" type="button">Play (S)</button></td>
+                    <td><button class="title-btn" id="step-fwd-animations" type="button">Step > (D)</button></td>
+                    <td><button class="title-btn" id="export-animations" type="button">Export</button></td>
+                    <td><button class="title-btn" id="load-animations" type="button">Load</button></td>
+                </tr>  
+            </table>
+            <ul id="animation-history"></ul>
+        </div>
+        <br><br>
+        <div class="child" id="drawing-options">
+            <table>
+                <tr>
+                    <td><h3>Drawing</h3></td>
+                    <td><button class="title-btn" id="draw-vertical-zones" type="button">Vertical Zones</button><button class="title-btn" id="draw-attacking-zones" type="button">Attacking Zones</button><button class="title-btn" id="move-attacking-zones" type="button">Move Attacking Zones</button><button class="title-btn" id="remove-drawings" type="button">Remove Drawings</button></td>
+                </tr>
+                <tr>
+                    <td>Drawing:</td>
+                    <td><input type="checkbox" id="drawing" name="drawing" value="drawing"><label for="drawing">Enabled</label></td>
+                </tr>
+                <tr>
+                    <td>Lines:</td>
+                    <td>Color: <input id="line-color" value="black"></input><button id="change-line-color" type="button">Change</button>
+                    <input type="checkbox" id="line" name="line" value="straight-line"><label for="line">Line</label>
+                    <input type="checkbox" id="dash" name="dash" value="dashed"><label for="dash">Dash</label>
+                    <input type="checkbox" id="arrow" name="arrow" value="arrow"><label for="arrow">Arrow</label></td>
+                </tr>
+                <tr>
+                    <td>Shapes:</td>
+                    <td>Color: <input id="shape-color" value="black"></input><button id="change-shape-color" type="button">Change</button>
+                    <input type="checkbox" id="square" name="square" value="square"><label for="square">Square</label>
+                    <input type="checkbox" id="circle" name="circle" value="circle"><label for="circle">Circle</label>
+                    <input type="checkbox" id="fill" name="fill" value="fill"><label for="fill">Fill</label>
+                    <input type="checkbox" id="border" name="border" value="border"><label for="border">Border</label>
+                    <input type="checkbox" id="shape-dash" name="shape-dash" value="shape-dash"><label for="shape-dash">Dash</label></td>
+                </tr>
+            </table>
+        </div>
+        <div class="child" id="color-choices">
+            <h3>Color Choices</h3>
+            <table>
+                <tr>
+                    <td>Player Color:</td>
+                    <td><input id="home-team-color" value="black"></input></td>
+                    <td><input id="away-team-color" value="white"></input></td>
+                </tr>
+                <tr>
+                    <td>Secondary Player Color:</td>
+                    <td><input id="home-sec-team-color" value="black"></input></td>
+                    <td><input id="away-sec-team-color" value="white"></input></td>
+                </tr>
+                <tr>
+                    <td>Number Color:</td>
+                    <td><input id="home-num-color" value="white"></input></td>
+                    <td><input id="away-num-color" value="black"></input></td>
+                </tr>
+                <tr>
+                    <td>Formation:</td>
+                    <td><select id="home-team-formation"></select></td>
+                    <td><select id="away-team-formation"></select></td>
+                </tr>
+            </table>            
+        </div>
+        <div class="child" id="players">
+            <h3>Players</h3>
+            <table>
+                <tr>
+                    <td align="center"><b>Home</b></td>
+                    <td align="center"><b>Away</b></td>
+                </tr>
+                <tr style="margin: 0;">
+                    <td align="center"><button id="add-home-team" type="button">+ Team</button></td>
+                    <td align="center"><button id="add-away-team" type="button">+ Team</button></td>
+                </tr>
+
+                <tr>
+                    <td align="center"><button id="add-home-player" type="button">+ Player</button></td>
+                    <td align="center"><button id="add-away-player" type="button">+ Player</button></td>
+                </tr>
+                <tr>
+                    <td align="center"><ul id="player-list-home"></ul></td>
+                    <td align="center"><ul id="player-list-away"></ul></td>
+                </tr>
+            </table>
+        </div>
         <div class="child" id="training-options">
             <table>
                 <tr>
@@ -123,96 +213,7 @@
                 </tr>
             </table>
         </div>
-        <div class="child" id="color-choices">
-            <h3>Color Choices</h3>
-            <table>
-                <tr>
-                    <td>Player Color:</td>
-                    <td><input id="home-team-color" value="black"></input></td>
-                    <td><input id="away-team-color" value="white"></input></td>
-                </tr>
-                <tr>
-                    <td>Secondary Player Color:</td>
-                    <td><input id="home-sec-team-color" value="black"></input></td>
-                    <td><input id="away-sec-team-color" value="white"></input></td>
-                </tr>
-                <tr>
-                    <td>Number Color:</td>
-                    <td><input id="home-num-color" value="white"></input></td>
-                    <td><input id="away-num-color" value="black"></input></td>
-                </tr>
-                <tr>
-                    <td>Formation:</td>
-                    <td><select id="home-team-formation"></select></td>
-                    <td><select id="away-team-formation"></select></td>
-                </tr>
-            </table>            
-        </div>
-        <div class="child" id="players">
-            <h3>Players</h3>
-            <table>
-                <tr>
-                    <td align="center"><b>Home</b></td>
-                    <td align="center"><b>Away</b></td>
-                </tr>
-                <tr style="margin: 0;">
-                    <td align="center"><button id="add-home-team" type="button">+ Team</button></td>
-                    <td align="center"><button id="add-away-team" type="button">+ Team</button></td>
-                </tr>
-
-                <tr>
-                    <td align="center"><button id="add-home-player" type="button">+ Player</button></td>
-                    <td align="center"><button id="add-away-player" type="button">+ Player</button></td>
-                </tr>
-                <tr>
-                    <td align="center"><ul id="player-list-home"></ul></td>
-                    <td align="center"><ul id="player-list-away"></ul></td>
-                </tr>
-            </table>
-        </div>
-        <div class="child" id="animation">
-            <table>
-                <tr>
-                    <td><h3>Animation</h3></td>
-                    <td><button class="title-btn" id="add-animation" type="button">+ Animation (W)</button></td>
-                    <td><button class="title-btn" id="step-bck-animations" type="button">Step < (A)</button></td>
-                    <td><button class="title-btn" id="play-animations" type="button">Play (S)</button></td>
-                    <td><button class="title-btn" id="step-fwd-animations" type="button">Step > (D)</button></td>
-                    <td><button class="title-btn" id="export-animations" type="button">Export</button></td>
-                    <td><button class="title-btn" id="load-animations" type="button">Load</button></td>
-                </tr>  
-            </table>
-            <ul id="animation-history"></ul>
-        </div>
-        <br><br>
-        <div class="child" id="drawing-options">
-            <table>
-                <tr>
-                    <td><h3>Drawing</h3></td>
-                    <td><button class="title-btn" id="draw-vertical-zones" type="button">Vertical Zones</button><button class="title-btn" id="draw-attacking-zones" type="button">Attacking Zones</button><button class="title-btn" id="move-attacking-zones" type="button">Move Attacking Zones</button><button class="title-btn" id="remove-drawings" type="button">Remove Drawings</button></td>
-                </tr>
-                <tr>
-                    <td>Drawing:</td>
-                    <td><input type="checkbox" id="drawing" name="drawing" value="drawing"><label for="drawing">Enabled</label></td>
-                </tr>
-                <tr>
-                    <td>Lines:</td>
-                    <td>Color: <input id="line-color" value="black"></input><button id="change-line-color" type="button">Change</button></td>
-                    <td><input type="checkbox" id="line" name="line" value="straight-line"><label for="line">Line</label></td>
-                    <td><input type="checkbox" id="dash" name="dash" value="dashed"><label for="dash">Dash</label></td>
-                    <td><input type="checkbox" id="arrow" name="arrow" value="arrow"><label for="arrow">Arrow</label></td>
-                </tr>
-                <tr>
-                    <td>Shapes:</td>
-                    <td>Color: <input id="shape-color" value="black"></input><button id="change-shape-color" type="button">Change</button></td>
-                    <td><input type="checkbox" id="square" name="square" value="square"><label for="square">Square</label></td>
-                    <td><input type="checkbox" id="circle" name="circle" value="circle"><label for="circle">Circle</label></td>
-                    <td><input type="checkbox" id="fill" name="fill" value="fill"><label for="fill">Fill</label></td>
-                    <td><input type="checkbox" id="border" name="border" value="border"><label for="border">Border</label></td>
-                    <td><input type="checkbox" id="shape-dash" name="shape-dash" value="shape-dash"><label for="shape-dash">Dash</label></td>
-                </tr>
-            </table>
-        </div>
+        
         
     </div>
     

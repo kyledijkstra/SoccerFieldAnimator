@@ -13,10 +13,13 @@ function addAnimation() {
   //Add players to slide
   for (p in HOME.players) {
     let player = HOME.players[p];
+    // console.log(player);
     slide.players.push({
       id: "home-player-" + player.id,
       x: player.x,
-      y: player.y
+      y: player.y,
+      name: player.name,
+      number: player.number
     });
   }
   for (p in AWAY.players) {
@@ -24,7 +27,9 @@ function addAnimation() {
     slide.players.push({
       id: "away-player-" + player.id,
       x: player.x,
-      y: player.y
+      y: player.y,
+      name: player.name,
+      number: player.number
     });
   }
   //Add drawings to slide
@@ -214,8 +219,16 @@ function removeAnimation(animationId) {
   writeAnimationList();
 }
 
+function removeAllAnimations() {
+  d3.selectAll("animation-history-list").remove();
+  // d3.selectAll("#animation-history-list-delete-button-" + animationId).remove();
+  ANIMATION_HISTORY = [];
+  writeAnimationList();
+}
+
 function exportAnimations(exportObj, exportName){
-  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+  var relativeObj = getRelativeAnimation(exportObj);
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(relativeObj));
   var downloadAnchorNode = document.createElement('a');
   downloadAnchorNode.setAttribute("href",     dataStr);
   downloadAnchorNode.setAttribute("download", exportName + ".json");
@@ -228,8 +241,101 @@ function loadAnimations() {
   fetch('./animations.json')
     .then(response => response.json())
     .then(data => {
-      ANIMATION_HISTORY = data;
+      ANIMATION_HISTORY = getAbsoluteAnimation(data);
       writeAnimationList();
       goToAnimation(0);
     });
+}
+
+function getRelativeAnimation(animationObj) {
+  var size = {len: FIELD_LENGTH - (2 * SIDELINE_MARGIN.side), width: FIELD_WIDTH - (2 * SIDELINE_MARGIN.top), sideMargin: SIDELINE_MARGIN.side, topMargin: SIDELINE_MARGIN.top};
+  var obj = {size: size, animation: animationObj};
+  return obj;
+}
+
+function getAbsoluteAnimation(animationObj) {
+  var oldLength = animationObj.size.len;
+  var oldWidth = animationObj.size.width;
+  var oldTopMargin = animationObj.size.topMargin;
+  var oldSideMargin = animationObj.size.sideMargin;
+  
+  var currSize = {len: FIELD_LENGTH - (2 * SIDELINE_MARGIN.side), width: FIELD_WIDTH - (2 * SIDELINE_MARGIN.top), sideMargin: SIDELINE_MARGIN.side, topMargin: SIDELINE_MARGIN.top};
+  var currLength = currSize.len;
+  var currWidth = currSize.width;
+
+  if (oldLength === currLength && oldWidth === currWidth && currSize.sideMargin === oldSideMargin && currSize === oldTopMargin) {
+    console.log('DID NOT CONVERT, DIMENSIONS ARE IDENTICAL');
+    return animationObj.animation;
+  }
+  
+  var animations = animationObj.animation;
+  var ret = [];
+  for (a in animations) {
+    var animObj = {};
+    var animation = animations[a];
+    //ball
+    animObj.ball = convertPoint(animation.ball, animationObj.size, currSize);
+    //players
+    var players = [];
+    for (p in animation.players) {
+      var player = convertPoint(animation.players[p], animationObj.size, currSize);
+      players.push(player);
+    }
+    animObj.players = players;
+    //drawings
+    var drawings = [];
+    for (d in animation.drawings) {
+      var drawing = animation.drawings[d];
+      drawing = convertDrawing(drawing, animationObj.size, currSize);
+      drawings.push(drawing);
+    }
+    animObj.drawings = drawings;
+    ret.push(animObj);
+  }
+  // console.log(ret);
+  return ret;
+}
+
+function convertPoint(point, oldSize, currSize) {
+  var diffLength = currSize.len/oldSize.len;
+  var diffWidth = currSize.width/oldSize.width;
+
+  point.x = (point.x - oldSize.sideMargin) * diffLength + currSize.sideMargin;
+  point.y = (point.y - oldSize.topMargin) * diffWidth + currSize.topMargin;
+
+  return point;
+}
+
+function convertArea(size, oldSize, currSize) {
+  var diffArea = (currSize.len*currSize.width)/(oldSize.len*oldSize.width);
+
+  return size * Math.sqrt(diffArea);
+}
+
+function convertHeight(height, oldSize, currSize) {
+  var diffWidth = currSize.width/oldSize.width;
+
+  return height * diffWidth;
+}
+
+function convertWidth(width, oldSize, currSize) {
+  var diffLength = currSize.len/oldSize.len;
+
+  return width * diffLength;
+}
+
+function convertDrawing(drawing, oldSize, currSize) {
+  var shape = drawing.type;
+  if (shape === "line") {
+    drawing.start = convertPoint(drawing.start, oldSize, currSize);
+    drawing.end   = convertPoint(drawing.end, oldSize, currSize);
+  } else if (shape === "circle") {
+    drawing.dimensions   = convertPoint(drawing.dimensions, oldSize, currSize);
+    drawing.dimensions.r = convertArea(drawing.dimensions.r, oldSize, currSize);
+  } else if (shape === "square") {
+    drawing.dimensions        = convertPoint(drawing.dimensions, oldSize, currSize);
+    drawing.dimensions.height = convertHeight(drawing.dimensions.height, oldSize, currSize);
+    drawing.dimensions.width  = convertHeight(drawing.dimensions.width, oldSize, currSize);
+  }
+  return drawing;
 }
