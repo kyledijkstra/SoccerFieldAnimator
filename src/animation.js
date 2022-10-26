@@ -221,7 +221,6 @@ function removeAnimation(animationId) {
 
 function removeAllAnimations() {
   d3.selectAll("animation-history-list").remove();
-  // d3.selectAll("#animation-history-list-delete-button-" + animationId).remove();
   ANIMATION_HISTORY = [];
   writeAnimationList();
 }

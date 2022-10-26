@@ -1,8 +1,6 @@
 /**
  * TODO
  * Allow direct animation import
- * Make import/export translate between different field sizes
- * Remove all animations button
  * Remove all players button
  * CMD+D = Drawing enable/disable
  */
