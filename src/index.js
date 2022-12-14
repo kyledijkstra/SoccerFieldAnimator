@@ -5,6 +5,7 @@
  * CMD+D = Drawing enable/disable
  * Allow live resizing of field
  * Reordering slides
+ * Change data structure so that players are assigned a team, teams aren't assigned players
  */
 
 $(document).ready(function() {

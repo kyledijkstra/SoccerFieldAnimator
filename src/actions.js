@@ -12,15 +12,15 @@ function addTeam(team) {
 }
 
 //Add a player from team onto the field
-function addPlayer(team, individual) {
+function addPlayer(team, individual, number, name) {
   var field = d3.select(FIELD_ID);
   if (team === "H") {
     if (individual) {
       HOME.players.push({
         x: FIELD_WIDTH / 2,
         y: SIDELINE_MARGIN.top + (12 * SIZE_MULT),
-        number: smallestAvailableNumber(HOME.players),
-        name: '',
+        number: number || number === 0 ? number : smallestAvailableNumber(HOME.players),
+        name: name ? name : '',
         id: HOME.playerIdTracker++
       });
     }
@@ -340,5 +340,19 @@ function removePlayer(team, id) {
       a--;
     }
   }
+}
+
+function removeAllPlayers() {
+  d3.selectAll(".home-player-list").remove();
+  d3.selectAll(".home-player").remove();
+
+  d3.selectAll(".away-player-list").remove();
+  d3.selectAll(".away-player").remove();
+
+  HOME.playerIdTracker = 0;
+  HOME.players = [];
+
+  AWAY.playerIdTracker = 0;
+  AWAY.players = [];
 }
 

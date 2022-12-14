@@ -18,7 +18,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         colorSecondary: "black",
         numColor: "white",
         formation: "4-3-3",
-        playerIdTracker: 11,
+        playerIdTracker: 0,
         players: []
     },
     AWAY = {
@@ -27,7 +27,7 @@ var FIELD_DIMENSIONS = {length: 120, width: 80},
         colorSecondary: "white",
         numColor: "black",
         formation: "4-3-3",
-        playerIdTracker: 11,
+        playerIdTracker: 0,
         players: []
     },
     COLORS = ["black", "white", "yellow", "blue", "skyblue", "cyan", "darkblue", "orange", "red", "maroon", "lightcoral", "magenta", "plum", "purple", "chartreuse"],

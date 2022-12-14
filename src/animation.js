@@ -254,9 +254,23 @@ function loadAnimations() {
     .then(response => response.json())
     .then(data => {
       ANIMATION_HISTORY = getAbsoluteAnimation(data);
+      loadPlayers()
       writeAnimationList();
       goToAnimation(0);
     });
+}
+
+function loadPlayers() {
+  var players = ANIMATION_HISTORY[0].players;
+  //remove all players
+  removeAllPlayers();
+  //add loaded players
+  for (p in players) {
+    var player = players[p];
+    var pidSplit = player.id.split('-');
+    var team = pidSplit[0];
+    addPlayer(team.substr(0,1).toUpperCase(), true, player.number, player.name);
+  }
 }
 
 function getRelativeAnimation(animationObj) {
